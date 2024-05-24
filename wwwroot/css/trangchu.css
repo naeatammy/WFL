@@ -1,0 +1,158 @@
+.h2
+    {   
+        padding: 10px 60px;
+        color: #fcfcfd; 
+        
+        font-size: 25px;
+        font-weight: 400;
+    }
+    h2::before {
+  content: "\00B7"; /* Mã Unicode của dấu chấm giữa */
+  margin-right: 0.5em; /* Điều chỉnh khoảng cách giữa dấu chấm và văn bản */
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    
+}
+.banner {
+    width: 100%;
+    height: 100vh;
+    background-image: url(/image/anh.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.head
+{
+    height:  64px;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+}
+.logo
+{   margin-left: 35px;
+    height: 50px;
+}
+.left
+{
+    
+    display: flex;
+    flex:1;
+    align-items:  center;
+    
+}
+.right
+{
+    
+    display: flex;
+    flex: 1;
+    align-items:  center;
+    justify-content: flex-end;
+}
+.Browse
+{   
+    margin-left: 30px;
+    font-size: 16px;
+    color: rgb(18, 21, 27);
+    text-decoration: none;
+    transition: 0.25s;
+    line-height: 1.5;
+    font-weight: bold;
+        font-style: italic;
+}
+.Browse:hover
+{
+    color: #589af0;
+}
+.login
+{
+    margin-right: 1cm;
+    font-size: 20px;
+    color: rgb(18, 21, 27);
+    text-decoration: none;
+    transition: 0.25s;
+    line-height: 1.5;
+    font-weight: bold;
+}
+.login:hover
+{
+    color: #589af0;
+}
+.signup
+{
+    margin-right: 1cm;
+    font-size: 20px;
+    color: rgb(18, 21, 27);
+    text-decoration: none;
+    transition: 0.25s;
+    line-height: 1.5;
+    font-weight: bold;
+}
+.signup:hover
+{
+    color: #589af0;
+}
+.Post-Button
+
+{   margin-right: 50px;
+    font-size: 15px;
+    line-height: 1.4;
+    text-align:  center;
+    color: white;
+    font-weight: bold;
+    padding-top: 6px;
+    padding-right: 13px;
+    padding-bottom: 6px;
+    padding-left: 13px;
+    border:none;
+    border: 1px solid ;
+    border-radius: 3px;
+    background-color: #e60278;
+    transition: 0.2s;
+    cursor: pointer;
+
+}
+.Post-Button:hover
+{
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    background-color: #c60267;
+}
+.Post-Button:active
+{
+    opacity: 0.8;
+}
+.body {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: row;
+    height: 552px;
+    padding: 60px 0px;
+    
+    
+}
+.leftbody
+{
+    display: flex;
+    flex:0.75;
+    margin-top: 50px;
+}
+.rightbody
+{
+    display: flex;
+    
+    
+    flex :1;
+}
+.HeadContent
+{   
+    color: white;
+    font-size: 57px;
+    padding: 30px 30px;
+}

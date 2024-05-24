@@ -1,0 +1,70 @@
+﻿@model List<Job>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Thêm các tùy chỉnh CSS của bạn ở đây nếu cần */
+        body {
+            background-color: #fff; /* Đặt màu nền của trang là màu trắng */
+            color: #000; /* Đặt màu văn bản là màu đen */
+        }
+
+        .table th, .table td {
+            background-color: #fff; /* Đặt màu nền cho các ô bảng là màu trắng */
+            color: #000; /* Đặt màu văn bản cho các ô bảng là màu đen */
+        }
+
+        .table th {
+            border-color: #000; /* Đặt màu viền cho các cột là màu đen */
+        }
+
+        .btn-custom {
+            background-color: #000; /* Đặt màu nền của nút là màu đen */
+            color: #fff; /* Đặt màu văn bản của nút là màu trắng */
+        }
+
+            .btn-custom:hover {
+                background-color: #333; /* Màu nền khi di chuột qua */
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 mb-4">Jobs</h1>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    
+                    <th>Name</th>
+                    <th>Client ID</th>
+                    <th>Expected Duration</th>
+                    <th>Payment Type</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var job in Model)
+                {
+                    <tr>
+                        
+                        <td>@job.Name</td>
+                        <td>@job.ClientId</td>
+                        <td>@job.ExpectedDuration</td>
+                        <td>@job.PaymentType</td>
+                        <td>@job.JobStatus</td>
+                        <td>
+                            <a asp-controller="Admin" asp-action="JobDetail" asp-route-id="@job.ID" class="btn btn-dark">Detail</a>
+                            <a asp-controller="Admin" asp-action="JobEdit" asp-route-id="@job.ID"  class="btn btn-dark">Edit</a>
+                            <a asp-controller="Admin" asp-action="Delete" asp-route-id="@job.ID" class="btn btn-dark">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-controller="Admin" asp-action="JobAdd" class="btn btn-custom">Create New Job</a>
+    </div>
+</body>
+</html>

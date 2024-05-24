@@ -1,0 +1,25 @@
+﻿.skill-container {
+    display: flex; /* Sử dụng flexbox để hiển thị các phần tử trên cùng một hàng */
+    flex-wrap: wrap; /* Cho phép các phần tử tự động xuống dòng khi không đủ không gian */
+}
+
+.card-text {
+    margin-right: 10px; /* Khoảng cách giữa các phần tử */
+}
+.info-container {
+    display: flex; /* Sử dụng flexbox để hiển thị các phần tử trong cùng một hàng */
+    flex-direction: column; /* Chỉ định hướng của flexbox là ngang (theo hàng) */
+    justify-content: right; /* Canh các phần tử theo khoảng cách giữa chúng */
+  
+}
+
+.card-text {
+    margin-bottom: 0; /* Loại bỏ margin dưới để không tạo ra khoảng cách dư thừa */
+    align-self: flex-end;
+}
+.id-infor {
+   
+    display: flex; /* Sử dụng flexbox để hiển thị các phần tử trong cùng một hàng */
+    flex-direction: row; /* Chỉ định hướng của flexbox là ngang (theo hàng) */
+    justify-content: space-between;
+}

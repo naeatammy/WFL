@@ -1,0 +1,152 @@
+﻿.h2 {
+    padding: 10px 60px;
+    color: #fcfcfd;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+h2::before {
+    content: "\00B7"; /* Mã Unicode của dấu chấm giữa */
+    margin-right: 0.5em; /* Điều chỉnh khoảng cách giữa dấu chấm và văn bản */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.fileicon {
+    padding: 0px 14px;
+    height: 24px;
+    width: 25px;
+    cursor: pointer;
+}
+
+.avatar {
+    display: flex;
+    height: 100%;
+    width: 150px;
+    align-items: center;
+    border: none;
+    background-color: white;
+    border-style: 1px solid;
+    cursor: pointer;
+}
+
+    .avatar:hover {
+        background-color: #bcc5d3;
+    }
+
+.user {
+    padding: 0px 14px;
+    height: 25px;
+    width: 25px;
+}
+
+.username {
+    padding: 0;
+    margin: 0
+}
+
+.bellicon {
+    padding: 0 14px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
+
+
+.head {
+    height: 64px;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    background-color: white;
+    top: 0;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.logo {
+    height: 50px;
+}
+
+.left {
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+.right {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.Browse {
+    padding: 12px 12px;
+    font-size: 16px;
+    color: rgb(18, 21, 27);
+    text-decoration: none;
+    transition: 0.25s;
+    line-height: 1.5;
+    font-weight: bold;
+    font-style: italic;
+    cursor: pointer;
+}
+
+    .Browse:hover {
+        color: #589af0;
+    }
+
+.post-project {
+    padding: 12px 12px;
+    font-size: 16px;
+    color: rgb(18, 21, 27);
+    text-decoration: none;
+    transition: 0.25s;
+    line-height: 1.5;
+    font-weight: bold;
+    font-style: italic;
+}
+
+    .post-project:hover {
+        color: #589af0;
+    }
+
+
+
+
+
+
+
+.blackmenu {
+    margin-top: 64px;
+    height: 50px;
+    display: flex;
+    padding: 0px 10px;
+    background-color: black;
+    color: white;
+}
+
+.black {
+    text-decoration: none;
+    color: white;
+    align-items: center;
+    font-style: italic;
+    padding: 10px 16px;
+    transition: 0.15s;
+    width: auto;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+    .black:hover {
+        background-color: #1a1f27;
+        color: white;
+        border-bottom: 3px solid #fcfcfd;
+    }

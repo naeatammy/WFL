@@ -1,0 +1,106 @@
+﻿@using PBL3.ViewModels
+@model JobViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Job</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Thêm các tùy chỉnh CSS của bạn ở đây nếu cần */
+        body {
+            background-color: #f8f9fa; /* Màu nền của trang là màu xám nhạt */
+            color: #343a40; /* Màu văn bản là màu đen */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: black; /* Màu header của card là màu đen */
+            color: #fff; /* Màu văn bản của header là màu trắng */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Add Job
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="description">ClientID:</label>
+                                <textarea asp-for="ClientID" class="form-control" id="clientid" rows="1"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input asp-for="Name" type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description:</label>
+                                <textarea asp-for="Description" class="form-control" id="description" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="expectedDuration">Expected Duration:</label>
+                                <input asp-for="ExpectedDuration" type="text" class="form-control" id="expectedDuration" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentType">Payment Type:</label>
+                                <select asp-for="PaymentType" class="form-control" id="paymentType" required>
+
+                                    <option value="Hourly Rate">Hourly Rate</option>
+                                    <option value="Fixed Price">Fixed Price</option>
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentAmount">Payment Amount:</label>
+                                <input asp-for="PaymentAmount" type="text" class="form-control" id="paymentAmount" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="createBy">Create By:</label>
+                                <input asp-for="CreateBy" type="text" class="form-control" id="createBy" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="jobStatus">Job Status:</label><br>
+                                <input type="radio" asp-for="JobStatus" value="Pending"> Pending<br>
+                                <input type="radio" asp-for="JobStatus" value="InProgress"> In Progress<br>
+                                <input type="radio" asp-for="JobStatus" value="Completed"> Completed<br>
+                            </div>
+                            <div class="form-group">
+                                <label>Skills:</label><br />
+                                
+                                @foreach (var skillName in Model.ListSkillNames)
+                                {
+                                    <div>
+                                        <input type="checkbox" name="SelectedSkillName" value="@skillName" />
+                                        <label>@skillName</label>
+                                    </div>
+                                }
+                            </div>
+                           
+
+
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-dark">Add</button>
+                    <a href="@Url.Action("ShowJob", "Admin")" class="btn btn-dark">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+   
+
+</body>
+</html>

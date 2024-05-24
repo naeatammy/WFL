@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    Layout = null;
+}
+@model User
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+    <link rel="stylesheet" type="text/css" href="~/css/Login.css">
+
+</head>
+<body>
+    <div class="login">
+        <div class="left">
+            <form method="post">
+                <h1 class="header">Hello!</h1>
+                <h1 class=" header">Welcome Back</h1>
+                <div class="input-box">
+                    <input type="text" placeholder="Email" required>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" required>
+                </div>
+                <div class="remember-forgot">
+                    <a href="#"> Forgot password?</a>
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+                <div class="Register-link">
+                    <p>
+                        Don't have an account?
+                        <a  asp-controller="SignUp" asp-action="SignUp"> Create an account</a>
+                    </p>
+
+                </div>
+            </form>
+
+        </div>
+        <div class=" right">
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,55 @@
+﻿@model User
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Thêm các tùy chỉnh CSS của bạn ở đây nếu cần */
+        body {
+            background-color: #f8f9fa; /* Màu nền của trang là màu xám nhạt */
+            color: #343a40; /* Màu văn bản là màu đen */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: black; /* Màu header của card là màu xanh */
+            color: #fff; /* Màu văn bản của header là màu trắng */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                User Detail
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="card-title">ID: @Model.ID</h5>
+                        <p class="card-text">Username ID: @Model.Username</p>
+                        
+                        <p class="card-text">Password: @Model.Password</p>
+
+                        <p class="card-text">Email: @Model.Email</p>
+                        <p class="card-text">FirstName: @Model.FirstName</p>
+                        <p class="card-text">LastName: @Model.LastName</p>
+                        <p class="card-text">CreateAt: @Model.CreatedAt</p>
+                    
+                    </div>
+                    <!-- Thêm các thông tin khác của công việc nếu cần -->
+                </div>
+            </div>
+        </div>
+        <a href="@Url.Action("ShowUsers", "Admin")" class="btn btn-dark">Back to User List</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+﻿body {
+    background-color: #f8f9fa;
+    color: #343a40;
+    margin-top: 50px;
+}
+
+.card-header {
+    background-color: black;
+    color: #fff;
+}
+
+.card-body {
+    margin-top: 20px;
+}
+
+.card-text {
+    margin-bottom: 10px;
+}
+.text-right mt-3
+{
+display: flex;
+justify-content: right;
+}

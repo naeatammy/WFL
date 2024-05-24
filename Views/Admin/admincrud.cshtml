@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    Layout = ViewData["Layout"] as string;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="~/css/adminview.css">
+
+
+</head>
+<body>
+    <div class="banner">
+        <div class="head">
+            <div class=" left">
+                <a class="trangchu" href="view.html">
+                    <img src="~/image/Untitled.png" class="logo">
+                </a>
+
+                <h1>Admin</h1>
+
+            </div>
+            <div class="right">
+            
+            </div>
+        </div>
+
+        <div class="blackmenu">
+
+            <a class="black" asp-controller="Admin" asp-action="ShowUsers">Users</a>
+            <a class="black" asp-controller="Admin" asp-action="ShowJob">Jobs</a>
+            
+        </div>
+
+
+
+
+
+    </div>
+
+    </div>
+</body>
+</html>
+<style>
+
+
+
+</style>

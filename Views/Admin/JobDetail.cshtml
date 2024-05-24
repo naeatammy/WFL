@@ -1,0 +1,85 @@
+﻿@using PBL3.ViewModels;
+@model JobViewModel
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Detail</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/JobDetail.css">
+    <style>
+        /* Thêm các tùy chỉnh CSS của bạn ở đây nếu cần */
+        body {
+            background-color: #f8f9fa; /* Màu nền của trang là màu xám nhạt */
+            color: #343a40; /* Màu văn bản là màu đen */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: black; /* Màu header của card là màu xanh */
+            color: #fff; /* Màu văn bản của header là màu trắng */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <strong>Job Detail</strong>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-20">
+                        <div class="form-group">
+                            <h3><strong>@Model.Name</strong><br /></h3>
+                            <div class="info-container">
+                                <strong class="card-text">$ @Model.PaymentAmount USD</strong>
+                                <strong class="card-text"> @Model.PaymentType</strong>
+                            </div>
+                        </div>
+
+
+
+
+
+                        
+                        
+                        <p class="card-text">Description: @Model.Description</p>
+                        
+                        <p class="card-text">Expected Duration: @Model.ExpectedDuration</p>
+                        
+                        
+                        <p class="card-text">Job Status: @Model.JobStatus</p>
+                        
+                        <p class="card-text">Create Time: @Model.CreateTime</p>
+                        <strong>Skills Required:</strong><br />
+                        <div class="skill-container">
+                            @foreach (var i in Model.ListSkillNames)
+                            {
+                                <p class="card-text">@i</p>
+                            }
+                        </div>
+
+
+                        <div class="id-infor">
+                            <p class="card-text">JobID: @Model.Id</p>
+                            <p class="card-text">Client ID: @Model.ClientID</p>
+
+                        </div>
+                        
+
+                    </div>
+                    <!-- Thêm các thông tin khác của công việc nếu cần -->
+                </div>
+            </div>
+        </div>
+        <a href="@Url.Action("ShowJob", "Admin")" class="btn btn-dark">Back to Job List</a>
+    </div>
+</body>
+</html>
