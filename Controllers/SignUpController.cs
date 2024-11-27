@@ -30,6 +30,7 @@ namespace PBL3.Controllers
             if (IsEmailUnique(user.Email, user.ID) && IsUsernameUnique(user.Username, user.ID))
             {
                 user.CreatedAt = DateTime.Now;
+                user.RoleID = 1;
                 dBContext.Users.Add(user);
 
                 dBContext.SaveChanges();
@@ -38,8 +39,7 @@ namespace PBL3.Controllers
                 Client client = new Client { ClientID = user.ID };
                 dBContext.Clients.Add(client);
                 dBContext.SaveChanges();
-                
-               
+                              
             }
             return View();
         }

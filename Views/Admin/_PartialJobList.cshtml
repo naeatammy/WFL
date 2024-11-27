@@ -1,0 +1,62 @@
+﻿
+@model List<Job>
+<div id="userlistcontainer" class="card-body">
+   
+    <div class="e-table">
+        <div class="table-responsive table-lg mt-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+
+                        <th>JobID</th>
+                        <th class="max-width">Name</th>
+
+                        <th>Payment Type</th>
+                        <th>Payment Amount </th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+
+                            <td class="text-nowrap align-middle">@i.ID</td>
+                            <td class="text-nowrap align-middle">@i.Name</td>
+
+                            <td class="text-nowrap align-middle"><span>@i.PaymentType</span></td>
+                            @*  @if (i.IsBanned == false)
+                        {
+                        <td class="text-center align-middle"><i class="fa fa-fw text-secondary cursor-pointer fa-toggle-on"></i></td>
+                        }
+                        else
+                        {
+                        <td class="text-center align-middle"><i class="fa fa-fw text-secondary cursor-pointer fa-toggle-off"></i></td>
+                        } *@
+                            <td class="text-nowrap align-middle"><span>@i.PaymentAmount</span></td>
+
+                            <td class="text-center align-middle">
+                                <div class="btn-group align-top">
+                                    <a asp-controller="Admin" asp-action="UserDetail" asp-route-id="@i.ID">
+                                        <button class="btn btn-sm btn-outline-secondary badge" type="button">Detail</button>
+                                    </a>
+                                    <a asp-controller="Admin" asp-action="Edit" asp-route-id="@i.ID">
+                                        <button class="btn btn-sm btn-outline-secondary badge" type="button">Edit</button>
+                                    </a>
+                                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@i.ID">
+                                        <button class="btn btn-sm btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

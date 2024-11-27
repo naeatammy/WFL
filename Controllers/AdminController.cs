@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using PBL3.Data;
 using PBL3.Models;
 using PBL3.ViewModels;
+using System.Linq;
 namespace PBL3.Controllers
 {
 	public class AdminController : Controller
@@ -14,22 +15,57 @@ namespace PBL3.Controllers
 		{
 			this.dBContext = dBContext;
 		}
+
+
+		
 		public IActionResult admincrud()
 		{
             ViewData["Layout"] = null;
-            return View();
+            var User = dBContext.Users.ToList();
+            return View(User);
 		}
 		public IActionResult ShowUsers()
 		{	
 			var User = dBContext.Users.ToList();
             return View(User);
         }
+
+		public IActionResult FilterUser(string searchTerm, string seletedStatus)
+		{
+			var User = dBContext.Users.ToList();
+			if(!string.IsNullOrEmpty(searchTerm))
+			{
+                User = dBContext.Users.Where(u => u.Username.Contains(searchTerm)).ToList();
+            }
+			if(!string.IsNullOrEmpty(seletedStatus))
+			{
+				if(seletedStatus == "Disabled")
+				{
+                    User = dBContext.Users.Where(u => u.IsBanned == true).ToList();
+                }
+				if(seletedStatus == "Active")
+				{
+                    User = dBContext.Users.Where(u => u.IsBanned == false).ToList();
+                }
+			}
+            
+			
+			return PartialView("_PartialUserList", User);
+		}
+
+
+
+
 		public IActionResult UserDetail(int id)
 		{	
 			var user = dBContext.Users.FirstOrDefault(x => x.ID == id);
 			return View(user);
 		}
-
+		[HttpPost]
+		public IActionResult UserDetail()
+		{
+			return RedirectToAction("admincrud");
+		}
 		public IActionResult Create()
 		{		
 			return View();
@@ -49,6 +85,8 @@ namespace PBL3.Controllers
 			if (IsEmailUnique(user.Email, user.ID) && IsUsernameUnique(user.Username, user.ID))
 			{	
 				user.CreatedAt= DateTime.Now;
+				user.Avatar = "";
+				user.RoleID = 1;
 				dBContext.Users.Add(user);
 				
 				dBContext.SaveChanges();
@@ -79,8 +117,9 @@ namespace PBL3.Controllers
         }
 		[HttpPost]
 		public IActionResult Edit(User user)
-		{	
-			
+		{
+			user.Avatar = "";
+            user.RoleID = 1;
             if (!IsUsernameUnique(user.Username, user.ID))
             {
                 ModelState.AddModelError("Username", "Trung UserName");
@@ -93,7 +132,7 @@ namespace PBL3.Controllers
             {
                 dBContext.Users.Update(user);
                 dBContext.SaveChanges();
-                return RedirectToAction("ShowUsers");
+                return RedirectToAction("admincrud");
             }
 
 
@@ -112,18 +151,88 @@ namespace PBL3.Controllers
 			var obj = dBContext.Users.Find(user.ID);
 				if(obj != null)
 			{
-				dBContext.Users.Remove(obj);
+				var jobregist = dBContext.jobRegistrations.Where(u => u.FreelancerID == user.ID).ToList();
+				var reviewlist = dBContext.Review.Where( u => u.FreelancerID == user.ID || u.ClientID == user.ID).ToList();
+				var joblist = dBContext.job.Where(u => u.freelancerID == user.ID || u.ClientId == user.ID).ToList();
+				foreach(var model in joblist)
+				{
+					model.IsDelete = true;
+				}
+				
+				
+				
+				dBContext.jobRegistrations.RemoveRange(jobregist);
+                dBContext.SaveChanges();
+                dBContext.Review.RemoveRange(reviewlist);
+                dBContext.SaveChanges();
+                dBContext.Users.Remove(obj);
 				dBContext.SaveChanges();
                 
             }
-            return RedirectToAction("ShowUsers");
+            return RedirectToAction("admincrud");
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public IActionResult ShowJob()
         {
-			var job = dBContext.job.ToList();
-			
+            var job = dBContext.job.Where(u => u.IsDelete == false).ToList();
+
+
             return View(job);
         }
+		public IActionResult FilterJob(string searchTerm, string seletedStatus, string sortOrder)
+		{
+            var job = dBContext.job.Where(u => u.IsDelete == false).ToList();
+            if (!string.IsNullOrEmpty(searchTerm))
+			{
+                job = dBContext.job.Where(u => u.Name.Contains(searchTerm)).ToList();
+
+            }
+            if (!string.IsNullOrEmpty(seletedStatus))
+            {
+                if(seletedStatus == "Fixed Hour")
+				{
+                    job = dBContext.job.Where(u => u.PaymentType.Contains(seletedStatus)).ToList();
+                }
+                if (seletedStatus == "Fixed Price")
+                {
+                    job = dBContext.job.Where(u => u.PaymentType.Contains(seletedStatus)).ToList();
+                }
+
+            }
+
+			if(!string.IsNullOrEmpty(sortOrder))
+			{
+                if (sortOrder == "minPrice")
+                {
+                    job = dBContext.job.OrderBy(u => u.PaymentAmount).Where(u => u.IsDelete == false).ToList();
+                }
+                if (sortOrder == "maxPrice")
+                {
+                    job = dBContext.job.OrderByDescending(u => u.PaymentAmount).Where(u => u.IsDelete == false).ToList();
+                }
+            }
+            return PartialView("_PartialJobList",job);
+		}
+
 		public IActionResult JobDetail(int id)
 		{
 			var job= dBContext.job.FirstOrDefault(x => x.ID == id);
@@ -137,16 +246,7 @@ namespace PBL3.Controllers
 				listSkill.Add(listskills.Name);
 			}
 			var jobview = new JobViewModel
-			{	Id = job.ID,
-				ClientID = job.ClientId,
-				Name = job.Name,
-				Description= job.Description,
-				ExpectedDuration = job.ExpectedDuration,
-				CreateBy = job.CreateBy,
-				CreateTime = job.CreateTime,
-				JobStatus = job.JobStatus,
-				PaymentAmount = job.PaymentAmount,
-				PaymentType = job.PaymentType,
+			{	job = job,
 				ListSkillNames = listSkill,
 				
 
@@ -174,22 +274,22 @@ namespace PBL3.Controllers
         }
 		[HttpPost]
 		public IActionResult JobAdd(JobViewModel jobview)
-		{	
-			List<Skill> selectedskills = dBContext.ListSkill.ToList();
-            //List<string> listSkillNames = dBContext.ListSkill.Select(x => x.Name).ToList();
+		{
 
-
-            //jobview.ListSkillNames = listSkillNames;
+			var currentuserID = HttpContext.Session.GetInt32("UserID");
+            List<Skill> selectedskills = dBContext.ListSkill.ToList();
+            
             Job job = new Job {
-				ClientId = jobview.ClientID,
-				Name = jobview.Name,
-				Description = jobview.Description,
-				ExpectedDuration = jobview.ExpectedDuration,
-				CreateBy = jobview.CreateBy,
-				CreateTime = DateTime.Now,
-			JobStatus = jobview.JobStatus,
-			PaymentAmount = jobview.PaymentAmount,
-			PaymentType = jobview.PaymentType,
+				ClientId = jobview.job.ClientId,
+				Name = jobview.job.Name,
+				Description = jobview.job.Description,
+				ExpectedDuration = jobview.job.ExpectedDuration,
+                CreateBy = dBContext.Clients.Include(u => u.User).Where(u => u.ClientID == jobview.job.ClientId).Select(u => u.User.Username).FirstOrDefault(),
+                CreateTime = DateTime.Now,
+
+			JobStatus = jobview.job.JobStatus,
+			PaymentAmount = jobview.job.PaymentAmount,
+			PaymentType = jobview.job.PaymentType,
 			
 
 			};
@@ -211,8 +311,6 @@ namespace PBL3.Controllers
              })
              .ToList();
 
-
-
             dBContext.RequiredSkill.AddRange(requiredSkills);
             dBContext.SaveChanges();
 
@@ -225,28 +323,22 @@ namespace PBL3.Controllers
         public IActionResult JobEdit(int id)
 		{
 			var job = dBContext.job.Find(id);
-            //var requiredSkillIds = dBContext.RequiredSkill
-            //.Where(u => u.JobId == id).ToList();
-			 var requiredSkillIds = dBContext.ListSkill.ToList();
+            
+			 var requiredSkillIds = dBContext.RequiredSkill.Where( u => u.JobId == id).ToList();
             List<string> listSkill = new List<string>();
 
             foreach (var skill in requiredSkillIds)
             {
-                
-				
-                listSkill.Add(skill.Name);
+                var skills = dBContext.ListSkill.FirstOrDefault(u => u.SkillID == skill.SkillId);
+
+                listSkill.Add(skills.Name);
             }
-            var jobview = new JobViewModel
-            {
-                Id = job.ID,
-                ClientID = job.ClientId,
-                Name = job.Name,
-                Description = job.Description,
-                ExpectedDuration = job.ExpectedDuration,
-                JobStatus = job.JobStatus,
-                PaymentAmount = job.PaymentAmount,
-                PaymentType = job.PaymentType,
-                SelectedSkillName = listSkill,
+			var jobview = new JobViewModel
+			{
+				job = job,
+				SelectedSkillName = listSkill,
+				ListSkillNames = dBContext.ListSkill.Select( u => u.Name).ToList(),
+				
 
             };
             return View(jobview);
@@ -257,16 +349,16 @@ namespace PBL3.Controllers
             List<Skill> selectedskills = dBContext.ListSkill.ToList();
 			 
 			Job job = new Job
-            {	ID= jobview.Id,
-                ClientId = jobview.ClientID,
-                Name = jobview.Name,
-                Description = jobview.Description,
-                ExpectedDuration = jobview.ExpectedDuration,
-                CreateBy = jobview.CreateBy,
+            {	ID= jobview.job.ID,
+                ClientId = jobview.job.ClientId,
+                Name = jobview.job.Name,
+                Description = jobview.job.Description,
+                ExpectedDuration = jobview.job.ExpectedDuration,
+                CreateBy = dBContext.Clients.Include(u => u.User).Where( u => u.ClientID == jobview.job.ClientId).Select(u => u.User.Username).FirstOrDefault(),
                 CreateTime = DateTime.Now,
-                JobStatus = jobview.JobStatus,
-                PaymentAmount = jobview.PaymentAmount,
-                PaymentType = jobview.PaymentType,
+                JobStatus = jobview.job.JobStatus,
+                PaymentAmount = jobview.job.PaymentAmount,
+                PaymentType = jobview.job.PaymentType,
 
 
             };
@@ -292,15 +384,20 @@ namespace PBL3.Controllers
 			})
 			.ToList();
 
-
-
             dBContext.RequiredSkill.AddRange(requiredSkillsToAdd);
             dBContext.SaveChanges();
-
-
-
-
             return RedirectToAction("ShowJob");
         }
+        public void JobDelete(int jobID)
+        {
+			var job = dBContext.job.Find(jobID);
+			job.IsDelete = true;
+			dBContext.job.Update(job);
+			dBContext.SaveChanges();
+           
+			
+        }
     }
+    
 }
+		

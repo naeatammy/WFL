@@ -22,7 +22,7 @@
         }
 
         .card-header {
-            background-color: black; /* Màu header của card là màu xanh */
+            background-color: white; /* Màu header của card là màu xanh */
             color: #fff; /* Màu văn bản của header là màu trắng */
         }
     </style>
@@ -37,10 +37,10 @@
                 <div class="row">
                     <div class="col-md-20">
                         <div class="form-group">
-                            <h3><strong>@Model.Name</strong><br /></h3>
+                            <h3><strong>@Model.job.Name</strong><br /></h3>
                             <div class="info-container">
-                                <strong class="card-text">$ @Model.PaymentAmount USD</strong>
-                                <strong class="card-text"> @Model.PaymentType</strong>
+                                <strong class="card-text">$ @Model.job.PaymentAmount USD</strong>
+                                <strong class="card-text"> @Model.job.PaymentType</strong>
                             </div>
                         </div>
 
@@ -50,14 +50,15 @@
 
                         
                         
-                        <p class="card-text">Description: @Model.Description</p>
+                        <p class="card-text">Description: @Model.job.Description</p>
                         
-                        <p class="card-text">Expected Duration: @Model.ExpectedDuration</p>
+                        <p class="card-text">Expected Duration: @Model.job.ExpectedDuration</p>
                         
                         
-                        <p class="card-text">Job Status: @Model.JobStatus</p>
+                        <p class="card-text">Job Status: @Model.job.JobStatus</p>
                         
-                        <p class="card-text">Create Time: @Model.CreateTime</p>
+                        <p class="card-text">Create Time: @Model.job.CreateTime</p>
+                        <p class="card-text">Create By: @Model.job.CreateBy</p>
                         <strong>Skills Required:</strong><br />
                         <div class="skill-container">
                             @foreach (var i in Model.ListSkillNames)
@@ -68,14 +69,14 @@
 
 
                         <div class="id-infor">
-                            <p class="card-text">JobID: @Model.Id</p>
-                            <p class="card-text">Client ID: @Model.ClientID</p>
+                            <p class="card-text">JobID: @Model.job.ID</p>
+                            <p class="card-text">Client ID: @Model.job.ClientId</p>
 
                         </div>
                         
 
                     </div>
-                    <!-- Thêm các thông tin khác của công việc nếu cần -->
+                   
                 </div>
             </div>
         </div>
@@ -83,3 +84,4 @@
     </div>
 </body>
 </html>
+    

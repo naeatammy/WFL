@@ -1,0 +1,96 @@
+﻿@model CombineList
+<div>
+
+    <div id="t_fl">
+        Top Freelancers
+        <div style="display: flex; flex-wrap: wrap;">
+            @if (Model.listFreelancer.Count == 0)
+            {
+                <div class="freelancer">
+                    No suitable
+                </div>
+            }
+            else
+            {
+                @foreach (var freelancer in Model.listFreelancer)
+                {
+                    <div class="freelancer"
+                         style="display: flex; margin-top: 10px; margin-left: 10px;">
+                        <div onclick="window.location= '@Url.Action("FreelancerDetail", "User", new {id = freelancer.FreelancerID})';" class="display_freelancer" style="display: flex; width: 190px;">
+                            <div>
+                                <img src="~/image/ava.png" style="width: 50px;height: 50px;">
+                            </div>
+                            <div>
+                                <p>@freelancer.User.FirstName @freelancer.User.LastName</p>
+                                <p>@freelancer.User.Username</p>
+                                <p>Rating: @freelancer.Rating</p>
+                            </div>
+                            <style>
+                                p {
+                                    font-size: 15px ;
+                                }
+
+                                .display_freelancer {
+                                    padding: 5px;
+                                }
+
+                                .display_freelancer:hover {
+                                    background-color: #f0f0f0;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div id="t_pr" style="margin-top: 10px;">
+        Top Projects
+        @foreach (var project in Model.listProject)
+        {
+            <div class=project style="display: flex; margin-top: 10px; margin-left: 10px;">
+                <div onclick="window.location= '@Url.Action("JobDetail", "User", new {id = project.ID})';" class="display_project" style="display: flex; border-bottom: 1px solid rgba(0,0,0,0.3); height: 80px; width: 40vw;">
+                    <div>
+                        <img src="~/image/ava.png" style="width: 32px;height: 32px;">
+                    </div>
+                    <div>
+                        <p style="margin-left: 5px; margin-bottom: 5px;">@project.Name</p>
+                        <p style="margin-left: 5px; margin-bottom: 5px;">Description: @project.Description</p>
+                        <p style="margin-left: 5px; margin-bottom: 5px;">Payment Type: @project.PaymentType</p>
+                    </div>
+                    <div style="margin-left: 40%">
+                        <p style="margin-bottom: 10px;">Amount: @project.PaymentAmount</p>
+                        <div style="border: 1px solid rgba(0,0,0,0.3); border-radius: 5px; width: 100px;">
+                            <p style="padding: 5px 0px 5px 0px; margin-left: 18px; color: green;">@project.JobStatus.Trim()</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                .display_project {
+                    padding: 5px;
+                }
+                .display_project:hover {
+                    background-color: #f0f0f0;
+                }
+            </style>
+        }
+    </div>
+</div>
+<style>
+    #t_fl {
+        font-size: 20px;
+        margin-top: 15px;
+        margin-left: 20px;
+    }
+
+    #t_pr {
+        font-size: 20px;
+        margin-top: 15px;
+        margin-left: 20px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+</style>

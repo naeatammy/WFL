@@ -1,0 +1,101 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
+
+
+.image
+{
+    font-size:50px;
+}
+.content {
+    margin-left:100px;
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    height: 260px;
+    border: 1px solid #ddd;
+    border-radius: 5px; /* Bo tròn góc */
+}
+
+.tag {
+    padding-left: 50px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Proposaltag {
+    margin-left: 30px;
+    font-size: 23px;
+    text-decoration: none;
+    color: black;
+}
+
+.Jobdetailtag {
+    font-size: 23px;
+    color: black;
+}
+
+.Jobdetailtag:hover {
+    color: black;
+    border-bottom: 5px solid black;
+}
+
+.freelancer-card {
+    display: flex;
+    width: 1000px;
+    align-items: center;
+    border: 0px solid #ddd;
+    border-radius: 5px; /* Bo tròn góc */
+    padding: 10px;
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: #212529; /* Màu chữ đen */
+}
+
+.image {
+    width: 140px; /* Độ rộng hình ảnh */
+    height: 140px; /* Độ cao hình ảnh */
+    margin-right: 20px; /* Khoảng cách bên phải */
+}
+
+.freelancer-info {
+    flex: 1; /* Cân đối không gian giữa hình ảnh và thông tin */
+}
+
+    .freelancer-info h5 {
+        margin-top: 0; /* Loại bỏ khoảng trống trên */
+    }
+
+.skills {
+    margin-top: 10px; /* Khoảng cách từ mô tả đến kỹ năng */
+    text-decoration: none;
+}
+
+    .skills span {
+        margin-right: 5px; 
+        padding: 5px 10px; 
+        background-color: black; 
+        color: #fff; 
+        border-radius: 5px; 
+        text-decoration: none;
+    }
+.txt
+    {
+        text-decoration: none;
+    }
+a {
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: inherit; /* Màu chữ mặc định */
+}
+
+    /* CSS for links when hovered */
+    a:hover {
+        text-decoration: none; /* Loại bỏ gạch chân khi di chuột vào */
+        color: inherit; /* Màu chữ mặc định khi di chuột vào */
+    }
+
+.button-container
+{
+    margin-left: auto;
+}

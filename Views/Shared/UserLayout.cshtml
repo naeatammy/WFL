@@ -2,13 +2,16 @@
 <html>
 
 <head>
-    <title>BrowseFreelancer</title>
+    <title>Browse</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="~/css/BrowseFreelancer.css">
     <style>
-
-
-       
+        body {
+            font-family: sans-serif;
+            margin: 0px;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
     </style>
 </head>
 
@@ -34,14 +37,14 @@
         <div id="profile" , class="menucpn">
         </div>
         <div id="profile_name" , class="menucpn">
-            username
+            @ViewBag.Username
         </div>
     </div>
 </div>
     
     
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div >
+        <main >
             @RenderBody()
         </main>
     </div>

@@ -2,11 +2,11 @@
 
 namespace PBL3.ViewModels
 {
-    public class JobDetail
+    public class JobDetailView
     {
-       public User User { get; set; }
-        public Client client{ get; set; }
+       
         public Job job { get; set; }
+        public List<JobRegistration> JobRegistration { get; set; }
         public List<string> ListSkill { get; set; }
     }
 }

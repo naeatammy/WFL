@@ -1,0 +1,378 @@
+﻿
+@{
+    ViewData["Title"] = "FreelancerMyProjectPastWork";
+    Layout = "~/Views/Shared/MyProjectFL_PW.cshtml";
+}
+
+@model List<Job>
+
+<div class="menu"> </div>
+<div class="menulist">
+    <div>
+        <a href="@Url.Action("Favourite", "List")" id="WFL" class="menuText" style="font-style: italic; color: black; text-decoration: none; font-weight: bold;">
+            WFL.com
+        </a>
+        <div id="Browse" , class="menuText" , style="font-weight: bold; cursor: pointer; padding-bottom: 50px;">
+            Browse
+            <div id="browseBox">
+                <div id="triangle1"></div>
+                <div id="browseBox_searchbox">
+                    <i class='bx bx-search-alt-2' style="margin-left: 17px;"></i>
+                    <input id="browseBox_search" oninput="updateBrowse()" type="text" placeholder="Searchs Projects or Freelancers">
+                    <div id="container" style="display: flex;">
+                        <div class="sub_container"
+                             style="margin-top: 50px; margin-left: 120px; width: 200px; place-items: center; cursor: pointer;">
+                            <img src="~/image/project.png" style="width: 32px; height: 32px; padding-left: 85px;">
+                            <p style="flex-wrap: wrap; text-align: center;">
+                                <a href="@Url.Action("BrowseFreelancer", "User")">
+                                    Explore exciting new project
+                                    opportunities now
+                                </a>
+                            </p>
+                        </div>
+                        <div class="sub_container"
+                             style="margin-top: 50px; margin-left: 30px; width: 200px; place-items: center; cursor: pointer;">
+                            <img src="~/image/ava.png" style="width: 32px; height: 32px; padding-left: 85px;">
+                            <p style="flex-wrap: wrap; text-align: center;">
+                                <a href="@Url.Action("BrowseJob", "User")">
+                                    Find top-rated freelancer for your
+                                    project
+                                </a>
+
+                            </p>
+                        </div>
+                    </div>
+                    <style>
+                        #triangle1 {
+                            width: 0;
+                            height: 0;
+                            border-left: 15px solid transparent;
+                            border-right: 15px solid transparent;
+                            border-bottom: 30px solid white;
+                            position: absolute;
+                            top: -20px;
+                            left: 40px;
+                        }
+
+                        #browseBox {
+                            visibility: hidden;
+                            position: absolute;
+                            left: -30px;
+                            top: 50px;
+                            background-color: white;
+                            width: 50vw;
+                            height: 60vh;
+                            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.3);
+                        }
+
+                        #browseBox_search {
+                            font-size: 20px;
+                            width: 88%;
+                            height: 40px;
+                            margin-top: 3.5px;
+                            outline: none;
+                            border: none;
+                        }
+
+                        #browseBox_searchbox {
+                            border: 2px solid rgba(0, 0, 0, 0.3);
+                            border-radius: 30px;
+                            width: 88%;
+                            height: 50px;
+                            margin-left: 20px;
+                            margin-top: 20px;
+                        }
+
+                    </style>
+                    <script>
+                        function updateBrowse() {
+                            var browseText = document.getElementById("browseBox_search").value;
+                            var formData = new FormData();
+                            formData.append("text", browseText);
+                            fetch('@Url.Action("UpdateBrowse", "MyProject")', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(response => response.text())
+                                .then(data => {
+                                    document.getElementById("container").innerHTML = data;
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        }
+                    </script>
+                </div>
+            </div>
+            <script>
+                var browse = document.getElementById("Browse");
+                browse.onmouseover = function () {
+                    document.getElementById("browseBox").setAttribute("style", "visibility: unset;");
+                }
+                browse.onmouseout = function () {
+                    document.getElementById("browseBox").setAttribute("style", "visibility: hidden;");
+                }
+            </script>
+        </div>
+        <a href="@Url.Action("PostAProject", "Post")" id="pAP" , class="menuText" , style="cursor: pointer; color: black; text-decoration: none; font-weight: bold;">
+            Post a project
+        </a>
+    </div>
+    <div>
+        <div>
+            <img src="~/image/noti.png" id="noti">
+        </div>
+        <div>
+            <img src="~/image/folder.png" id="folder">
+        </div>
+        <div>
+            <img src="~/image/ava.png" id="profile">
+        </div>
+        <div id="profile_name_box">
+            <div id="profile_name" , class="menucpn" style="padding-bottom: 50px;">
+                @ViewBag.Username
+                <div id="profile_menu_box" style="visibility: hidden">
+                    <div id="triangle2"></div>
+                    <div id="profile_menu" style="position: absolute; background-color: white; box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.3);">
+                        <div id="edit_profile" class="content_menu">
+                            <a href="@Url.Action("Profile", "User")" class="menu_text" style="color: black; text-decoration: none;">Edit Profile</a>
+                        </div>
+                        <div id="change_password" class="content_menu">
+                            <a href="@Url.Action("ChangePassword", "User")" class="menu_text" style="color: black; text-decoration: none;">Change Password</a>
+                        </div>
+                        <div id="log_out" class="content_menu">
+                            <a href="@Url.Action("LogOut", "LogIn")" class="menu_text" style="color: black; text-decoration: none;">Log out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                #profile_menu {
+                    top: 40px;
+                    width: 150px;
+                }
+
+                .content_menu {
+                    font-size: 15px;
+                    padding: 10px;
+                }
+
+                    .content_menu:hover {
+                        background-color: #f0f0f0;
+                    }
+
+                .menu_text {
+                    color: black;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                #triangle2 {
+                    width: 0;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 20px solid white;
+                    position: absolute;
+                    left: 20px;
+                    z-index: 0;
+                }
+            </style>
+            <script>
+                var profile_menu = document.getElementById("profile_name");
+                profile_menu.onmouseover = function () {
+                    document.getElementById("profile_menu_box").setAttribute("style", "visibility: unset;");
+                }
+
+                profile_menu.onmouseout = function () {
+                    document.getElementById("profile_menu_box").setAttribute("style", "visibility: hidden");
+                }
+            </script>
+        </div>
+    </div>
+</div>
+<div class="banner">
+    <div class="blackmenu">
+        <a class="listtag" href="@Url.Action("Favourite", "List")">List</a>
+        <a class="myprojecttag" href="@Url.Action("ClientMyProjectOpenProject", "MyProject")">My Projects</a>
+        
+    </div>
+    <div style="display: flex;">
+        <a id="cw" href="@Url.Action("FreelancerMyProjectCurrentWork", "MyProject")">
+            <strong id="cw_text">Current Work</strong>
+        </a>
+        <a id="pw" href="@Url.Action("FreelancerMyProjectPastWork", "MyProject")">
+            <strong id="pw_text">Past Work</strong>
+        </a>
+        <button id="client">
+            <a href="@Url.Action("ClientMyProjectOpenProject", "MyProject")">
+                <strong>As Client</strong>
+            </a>
+        </button>
+        <button id="freelancer">
+            <strong>As Freelancer</strong>
+        </button>
+    </div>
+    <div id="div-content" style="display: flex; margin-left: 50px;">
+        <div id="search_box">
+            <i class='bx bx-search-alt-2' style="margin-left: 17px;"></i>
+            <input id="search" type="text" placeholder="Searchs Projects" oninput="updateTable()">
+        </div>
+        <div id="show_box" , style="display: flex;">
+            <h1 id="show_text" , style="font-size: 20px;">Show:</h1>
+        </div>
+        <select id="show_op" name="pageSize" onchange="updateTable()">
+            <option value="10" data="@(ViewBag.PageSize == 10 ? "selected" : "")">10</option>
+            <option value="20" data="@(ViewBag.PageSize == 20 ? "selected" : "")">20</option>
+            <option value="50" data="@(ViewBag.PageSize == 50 ? "selected" : "")">50</option>
+            <option value="100" data="@(ViewBag.PageSize == 100 ? "selected" : "")">100</option>
+        </select>
+        <script>
+            function updateTable() {
+                var pageSize = document.getElementById("show_op").value;
+                var text = document.getElementById("search").value;
+                var sort = document.getElementById("view_op").value;
+                var formData = new FormData();
+                formData.append("pageSize", pageSize);
+                formData.append("text", text);
+                formData.append("sort", sort);
+
+                fetch('@Url.Action("UpdateTablePW", "MyProject")', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("projectTable").innerHTML = data;
+                        attachRightClickEvent();
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        </script>
+        <div id="view_box" , style="display: flex;">
+            <h1 id="view_text" , style="font-size: 20px;">Sort:</h1>
+        </div>
+        <select id="view_op" onchange="updateTable()">
+            <option value="ClientID">ClientID</option>
+            <option value="Description">Description</option>
+            <option value="PaymentAmount">PaymentAmount</option>
+        </select>
+    </div>
+    <div id="display" style="overflow-y:auto">
+        @if (Model.Count() == 0)
+        {
+            <h1 id="display_null" style="font-size: 20px; text-align: center;
+            margin-top: 15%;">
+                Your past works are displayed here
+            </h1>
+        }
+        else
+        {
+            <table id="projectTable">
+                <thead>
+                    <tr>
+                        <td>Job ID</td>
+                        <td>ClientID</td>
+                        <td>Name</td>
+                        <td>Description</td>
+                        <td>ExpectedDuration</td>
+                        <td>PaymentAmount</td>
+                        <td>PaymentType</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var job in Model)
+                    {
+
+                        <tr onclick="window.location= '@Url.Action("JobDetail", "User", new {id = job.ID})';" style="cursor: pointer;">
+                            <td>@job.ID</td>
+                            <td>@job.ClientId</td>
+                            <td>@job.Name</td>
+                            <td>@job.Description</td>
+                            <td>@job.ExpectedDuration</td>
+                            <td>@job.PaymentAmount</td>
+                            <td>@job.PaymentType</td>
+                            <td>@job.JobStatus</td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+    <div id="contextMenu" class="context-menu">
+        <div class="context-menu__item">Review</div>
+        <div class="context-menu__item">Delete</div>
+    </div>
+    <dialog id="myDialog1" style="position:absolute; left: 35vw; top: 35vh; border-radius: 5px">
+        <div style="display: flex;">
+            <p style="font-size: 20px; font-weight: bold; margin-top: 20px; margin-left: 17px">Rating</p>
+            <div class="rating" style="display: flex;">
+                <input type="text" id="rating_text" style="margin-top: 5px; padding: 5px 5px 5px 5px; font-size: 15px;" dir="ltr">
+                <p id="rating_text1" style="color:red; font-size: 10px; margin: 10px 0px 0px 20px;"></p>
+                <script>
+                    document.getElementById("rating_text").addEventListener('input', function () {
+                        var rating = document.getElementById("rating_text").value;
+                        if (!(parseFloat(rating) >= 1 && parseFloat(rating) <= 5)) {
+                            document.getElementById("rating_text1").innerText = "Enter a number from 1 to 5";
+                        } else {
+                            document.getElementById("rating_text1").innerText = "";
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+        <div>
+            <p style="font-size: 20px; font-weight: bold; margin-top: 20px; margin-left: 17px; margin-bottom: 10px;">Review</p>
+            <textarea id="rev" placeholder="Review"></textarea>
+        </div>
+        <div class="dialog-buttons">
+            <input type="submit" onclick="reviewFreelancer()" style="cursor: pointer; margin-right: 50px; margin-left: 10px">
+            <button id="closeDialog" style="cursor: pointer;">Close</button>
+            <script>
+                function reviewFreelancer() {
+                    var id = currentRow.cells[0].innerText;
+                    var rating = document.getElementById("rating_text").value;
+                    var review = document.getElementById("rev").value;
+                    var formData = new FormData();
+                    formData.append("jobID", id);
+                    formData.append("rating", rating);
+                    formData.append("review", review);
+                    fetch('@Url.Action("ReviewClient", "MyProject")', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    document.getElementById("myDialog1").close();
+                }
+            </script>
+        </div>
+    </dialog>
+    <dialog id="myDialog2" style="place-items: center; padding: 20px 20px 20px 20px; position: absolute;
+                    left: 40vw; top: 50vh; border-radius: 5px;">
+        <div>
+            <p style="padding-bottom: 10px">Bạn có chắn chắn muốn xóa không?</p>
+            <input type="submit" value="OK" onclick="DeleteJob()" style="cursor: pointer;">
+            <script>
+                function DeleteJob() {
+                    var jobID = currentRow.cells[0].innerText;
+                    var formData = new FormData();
+                    formData.append("jobID", jobID);
+                    fetch('@Url.Action("DeleteJob", "MyProject")', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    document.getElementById("myDialog2").close();
+                    document.getElementById("myDialog2").addEventListener("close", function () {
+                        window.location.reload(true);
+                    });
+                }
+            </script>
+            <button id="closeDelDialog">Cancel</button>
+        </div>
+    </dialog>
+</div>
+

@@ -1,6 +1,6 @@
 ﻿@using PBL3.ViewModels
 @{
-    Layout = null;
+    Layout = "headerlayout";
 }
 @model List<BrowseFreelancerView>
 
@@ -10,108 +10,28 @@
 <head>
     <title>BrowseFreelancer</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="~/css//BrowseFreelancer.css">
+    <link rel="stylesheet" href="~/css/BrowseFreelancer.css">
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+
 
     <style>
-        
-
         body {
-            font-family: "Inria Sans", sans-serif;
-            overflow-x: hidden;
-            margin: 0px;
+            font-family: sans-serif;
         }
-
-        .freelancer-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 20px;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            color: #000000; /* Màu đen */
-            text-decoration: none; /* Loại bỏ gạch chân */
-            
-        }
-        
-
-            .freelancer-card img {
-                border-radius: 50%;
-                width: 100px;
-                height: 100px;
-                object-fit: cover;
-                margin-right: 15px;
-                
-
-            }
-
-            .freelancer-card h5 {
-                font-size: 1.5em;
-                margin: 0 0 10px;
-            }
-
-            .freelancer-card p {
-                margin: 5px 0;
-            }
-
-            .freelancer-card .skills {
-                display: flex;
-                flex-wrap: wrap;
-                
-                text-decoration: none; /* Loại bỏ gạch chân */
-            }
-
-                .freelancer-card .skills span {
-                    background-color: black;
-                    color: white;
-                    padding: 5px 10px;
-                    border-radius: 15px;
-                    margin: 5px;
-                }
-
-        .rating {
-            display: flex;
-        }
-
-
-
     </style>
 </head>
 
 <body>
-    <div class="menu"> </div>
-    <div class="menulist">
-        <div>
-            <h1 id="WFL" class="menuText" style="font-style: italic;">
-                WFL.com
-            </h1>
-            <h1 id="Browse" , class="menuText">
-                Browse
-            </h1>
-            <h1 id="pAP" , class="menuText">
-                Post a project
-            </h1>
-        </div>
-        <div>
-            <div id="noti" , class="menucpn">
-            </div>
-            <div id="folder" , class="menucpn">
-            </div>
-            <div id="profile" , class="menucpn">
-            </div>
-            <div id="profile_name" , class="menucpn">
-                username
-            </div>
-        </div>
-    </div>
-
 
     <form >
         <div style="display: flex; margin-top: 10px;">
             <h1 id="browse">Browse</h1>
-            <input id="browsetextbox" cols="30" rows="1" 
-                   style="font-size: 20px; width: 50%; height: 35px; border-radius: 20px; border: 2px solid rgba(0,0,0,0.3);"></input>
-            <Button id="search">Search</Button>
+            <input type="text" id="browsetextbox" placeholder="Search Freelancers" cols="30" rows="1" 
+                   style="font-size: 15px; width: 50%; height: 35px;"></input>
+           
         </div>
     </form>
    
@@ -120,67 +40,91 @@
 
 
 
-    <div style="display: flex;">
-        <h3 id="freelancer" style="font-size: 23px;">Freelancer</h3>
-        <h3 id="project" style="font-size: 23px;">Project</h3>
+    <div style="display: flex; margin-bottom: 20px;">
+        <a class="freelancertag"  style="font-size: 23px; color: black; text-decoration: none; border-bottom: 5px solid black; padding: 0px 5px 0px 5px; "> <strong>Freelancer</strong></a>
+        <a class="Projecttag" asp-controller="User" asp-action="BrowseJob" style="font-size: 23px; text-decoration: none; color: black;"><strong>Project</strong></a>
     </div>
+
+    <style>
+        .Projecttag:hover {
+            border-bottom: 5px solid black;
+        }
+    </style>
+
     <div style="display: flex;">
         <div id="filterbox">
             <h1 id="filtertext" style="font-size: 25px;">Filters</h1>
             <h1 id="skills" style="font-size: 20px;">Skills</h1>
-            <textarea id="skilltextbox" cols="23" rows="1"
-                style="font-size: 20px; width: 75%; height: 35px; border-radius: 20px; border: 2px solid rgba(0,0,0,0.3);"></textarea>
+            <input id="skilltextbox" cols="23" rows="1"
+                style="font-size: 15px; width: 75%; height: 35px; "></input>
 
           
                 @foreach (var skill in Model.First().ListSkill)
                 {
                     <div id="checkbox1" style="display: flex;">
-                        <input type="checkbox" style="width: 20px; height: 20px;" onchange="handleCheckboxChange('@skill')">
-                        <div id="mad" style="font-size: 18px;">@skill</div>
+                    <input type="checkbox" class="skillCheckbox" value="@skill.SkillID" style="width: 20px; height: 20px;">
+                    <div id="mad" style="font-size: 15px;margin-top:0px">@skill.Name</div>
                     </div>
                 }
             
            
 
 
-            <form asp-action="BrowseFreelancer" method="get" class="form-inline">
-                <h1 id="country" style="font-size: 20px;">Country</h1>
-                <textarea id="countrytextbox" cols="23" rows="1"
-                          style="font-size: 20px; width: 75%; height: 35px; border-radius: 20px; border: 2px solid rgba(0,0,0,0.3);"></textarea>
+            <form  class="form-inline">
+                <h1 id="country" style="font-size: 15px;">Country</h1>
+                <input type="text" id="countrytextbox" cols="23" rows="1"
+                          style="font-size: 15px; width: 75%; height: 35px;"></input>
             </form>
-            
+
 
 
 
 
 
             <div style="display: flex; margin-left: 50px;">
-                <h2 id="textrating" style="font-size: 20px;">Rating</h2>
+                <h2 id="textrating" style="font-size: 20px; margin-top:22px;">Rating</h2>
                 <div class="rating">
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
+                    <span class="star" data-rating="5">&#9733;</span>
+                    <span class="star" data-rating="3">&#9733;</span>
+                    <span class="star" data-rating="3">&#9733;</span>
+                    <span class="star" data-rating="2">&#9733;</span>
+                    <span class="star" data-rating="1">&#9733;</span>
                 </div>
             </div>
 
-        </div>
-        <div id="topresultbox">
-            <h1 id="topresulttext" style="font-size: 25px;">Top Results</h1>
 
-            
+
+        </div>
+
+
+
+        <div id="topresultbox">
+            <div class="resultandsort">
+                <h1 id="topresulttext" style="font-size: 25px;">Top Results</h1>
+                <div class="sortfreelancer">
+                    <label for="sortOptions">Sort By:</label>
+                    <select id="sortOptions" class="form-control" required>
+                        <option value="">None</option>
+                        <option value="lowestRating">Lowest Rating</option>
+                        <option value="highestRating">Highest Rating</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="freelancerlistContainer">
                 @foreach (var freelancer in Model)
                 {
                     <div class="col-md-12 mb-4">
-                        <a href="@Url.Action("FreelancerDetail", "User", new { id = freelancer.id })" class="freelancer-card">
-                            <img src="~/image/cropped-1920-1080-1339443.png" alt="@freelancer.UserName" />
+                        <a href="@Url.Action("FreelancerDetail", "User", new { id = freelancer.freelancer.FreelancerID })" class="freelancer-card">
+                            <img src="~/image/cropped-1920-1080-1339443.png" />
                             <div>
-                                <h5>@freelancer.UserName</h5>
-                            
-                                <p><strong>Rating:</strong> @freelancer.Rating</p>
-                                <p><strong>Country:</strong> @freelancer.Country</p>
-                                <p><strong>Description:</strong> @freelancer.Description</p>
+                          
+                                <h5>@freelancer.freelancer.User.Username</h5>
+                           
+
+                                <p><strong>Rating:</strong> @freelancer.freelancer.Rating</p>
+                                <p><strong>Country:</strong> @freelancer.freelancer.Location</p>
+                                <p><strong>Description:</strong> @freelancer.freelancer.Description</p>
                                 <div class="skills">
                                     @foreach (var skill in freelancer.FreelancerSkill)
                                     {
@@ -190,17 +134,65 @@
                             </div>
                         </a>
                     </div>
+                   
                 }
-            }
-           
-                </div>
-            }
-
+            </div>
         </div>
-    </div>
 
     <script>
-       
+        $(document).ready(function () {
+                function filterFreelancer(searchTerm, sortOrder, selectedSkills, sortCountry, rating) {
+                    console.log("Filtering freelancers...", searchTerm, sortOrder, selectedSkills, sortCountry, rating);
+
+                $.ajax({
+                    url: '@Url.Action("FilterFreelancer", "User")',
+                    type: 'GET',
+                    traditional: true,
+                    data: {
+                        searchTerm: searchTerm,
+                        sortOrder: sortOrder,
+                        sortCountry: sortCountry,
+                        selectedSkills: selectedSkills,
+                        rating: rating
+                        
+                    },
+                    success: function (result) {
+                        $('#freelancerlistContainer').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Error:", error);
+                    }
+                });
+            }
+            function applyFilters(rating) {
+                var searchTerm = $('#browsetextbox').val();
+                var sortOrder = $('#sortOptions').val();
+                var sortCountry = $('#countrytextbox').val();
+                var selectedSkills = $('.skillCheckbox:checked').map(function () {
+                    return parseInt(this.value);
+                }).get();
+
+                    filterFreelancer(searchTerm, sortOrder, selectedSkills, sortCountry, rating);
+            }
+
+            $('#browsetextbox').on('keyup', function () {
+                applyFilters();
+            });
+            $('#sortOptions').change(function() {
+                applyFilters();
+            });
+            $('.skillCheckbox').change(function () {
+                applyFilters();
+            });
+            $('#countrytextbox').on('keyup', function () {
+                applyFilters();
+            });
+            $('.star').on('click', function () {
+              var rating = $(this).data('rating');
+                applyFilters(rating);
+            });
+        });
+
     </script>
 </body>
 

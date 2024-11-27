@@ -1,0 +1,153 @@
+﻿    @*
+        For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    *@
+    @{
+        ViewData["Title"] = "PostAProject";
+        Layout = "~/Views/Shared/PostAProject.cshtml";
+    }
+
+    @model IEnumerable<PBL3.Models.Skill>
+
+    <div class="container">
+        <div class="div-head">
+            <h1 id="tellus">Tell us what you need</h1>
+            <form id="projectForm">
+                    <div class="sub_container">
+                        <h2>Name of Project</h2>
+                        <input id="name" type="text" placeholder="Name of Project">
+                    </div>
+                    <div class="sub_container">
+                        <h2>Description</h2>
+                        <textarea id="des" placeholder="Description of project"></textarea>
+                    </div>
+                    <div class="sub_container" style="display: flex;">
+                        <h2>Expected Duration:</h2>
+                        <select id="duration1" class="duration">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        <select id="duration2" class="duration">
+                            <option value="day(s)">day(s)</option>
+                            <option value="week(s)">week(s)</option>
+                            <option value="month(s)">month(s)</option>
+                            <option value="year(s)">year(s)</option>
+                        </select>
+                    </div>
+                    <div class="sub_container">
+                        <h2>Skills:</h2>
+                        <div style="display: flex;">
+                            <div class="cols">
+                                @for (int i = 0; i < Model.Count() / 2; i++)
+                                {
+                                    var skill = Model.ElementAt(i);
+                                    <div style="display: flex;">
+                                        <input id="skill_@skill.SkillID" name="skills" type="checkbox" value="@skill.SkillID">
+                                        <label for="skill_@skill.SkillID">@skill.Name</label>
+                                    </div>
+                                }
+                            </div>
+                            <div class="cols">
+                                @for (int i = Model.Count() / 2; i < Model.Count(); i++)
+                                {
+                                    var skill = Model.ElementAt(i);
+                                    <div style="display: flex;">
+                                        <input id="skill_@skill.SkillID" name="skills" type="checkbox" value="@skill.SkillID">
+                                        <label for="skill_@skill.SkillID">@skill.Name</label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sub_container">
+                        <h2>Payment</h2>
+                        <div class="sub_container1" style="display: flex;">
+                            <div class="type" style="display: flex;">
+                                <h3>Type:</h3>
+                                <select id="paymentType" name="paymentType" class="type_option">
+                                    <option value="Hourly Rate">Hourly Rate</option>
+                                    <option value="Fixed Price">Fixed Price</option>
+                                </select>
+                            </div>
+                            <div class="amount" style="display: flex;">
+                                <h3>Amount:</h3>
+                                <input id="paymentAmount" name="paymentAmount" type="text" id="amount_text">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="padding-bottom: 100px;">
+                        <input id="post" type="submit" value="Post">
+                    </div>
+                @Html.AntiForgeryToken()    
+                </form>
+            </div>
+            <div class="div-second">
+                <img src="~/image/laptop.jpg" alt="Laptop">
+            </div>  
+    </div>
+    <script @* src="~/js/PostAProject.js" *@>
+    document.getElementById('projectForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Ngăn chặn hành động mặc định của form
+
+        let projectName = document.getElementById('name').value;
+        let description = document.getElementById('des').value;
+        let duration1 = document.getElementById('duration1').value;
+        let duration2 = document.getElementById('duration2').value;
+        let paymentType = document.getElementById('paymentType').value;
+        let paymentAmount = document.getElementById('paymentAmount').value;
+        let skills = [];
+        document.querySelectorAll('input[name="skills"]:checked').forEach(skill => {
+            skills.push(skill.value);
+        });
+
+        if (!projectName || !description || !duration1 || !duration2 || !paymentType || !paymentAmount || skills.length === 0) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        let data = {
+            job: {
+                Name: projectName,
+                Description: description,
+                ExpectedDuration: duration1 + ' ' + duration2,
+                PaymentType: paymentType,
+                PaymentAmount: parseFloat(paymentAmount),
+                Client: { User: { Username: 'YourUsername' } } // Adjust as necessary
+            },
+            SelectedSkillName: skills
+        };
+
+        fetch('/Post/Create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = '/Post/Success'; // Redirect to a success page
+                } else {
+                    alert('Có lỗi xảy ra 1');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra 2');
+            });
+    });
+    
+    
+    </script>
+

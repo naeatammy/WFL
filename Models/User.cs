@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace PBL3.Models
 {
 	public class User
@@ -10,8 +11,8 @@ namespace PBL3.Models
 		[Required]
 		[MaxLength(128)]
 		
-		
 		public string Username { get; set; }
+		public string? Avatar { get; set; }
 
 		[Required]
 		[MaxLength(128)]
@@ -27,7 +28,9 @@ namespace PBL3.Models
 		public string? LastName { get; set; }
 		public DateTime? CreatedAt { get; set; }
 		public bool IsBanned { get; set; } = false;
-		public List<UserRole> ListRole { get; set; }
+		[ForeignKey("RoleID")]
+		public int RoleID { get; set; }
+		public Role Role { get; set; }
 		
 	}
 }

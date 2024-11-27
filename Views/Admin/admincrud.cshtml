@@ -6,6 +6,7 @@
 @{
     Layout = ViewData["Layout"] as string;
 }
+@model List<User>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +16,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i&display=swap">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="~/css/adminview.css">
+   
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
 
 
 </head>
@@ -25,18 +28,19 @@
                 <a class="trangchu" href="view.html">
                     <img src="~/image/Untitled.png" class="logo">
                 </a>
-
-                <h1>Admin</h1>
+              
+                
+                
 
             </div>
             <div class="right">
-            
+                <a  asp-controller="LogIn" asp-action="LogOut"> <strong>Log Out</strong></a>
             </div>
         </div>
 
         <div class="blackmenu">
 
-            <a class="black" asp-controller="Admin" asp-action="ShowUsers">Users</a>
+            <a class="black" asp-controller="Admin" asp-action="admincrud">Users</a>
             <a class="black" asp-controller="Admin" asp-action="ShowJob">Jobs</a>
             
         </div>
@@ -47,7 +51,169 @@
 
     </div>
 
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="row flex-lg-nowrap">
+           
+            <div class="col">
+                
+                <div class="row flex-lg-nowrap">
+                    <div class="col mb-3">
+                        <div class="e-panel card">
+                            <div id="userlistcontainer" class="card-body">
+                                <div class="card-title">
+                                    <h6 class="mr-2"><span>Users</span><small class="px-1">Be a wise leader</small></h6>
+                                </div>
+                                <div class="e-table">
+                                    <div class="table-responsive table-lg mt-3">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    
+                                                    <th>ID</th>
+                                                    <th class="max-width">Name</th>
+                                                    <th class="sortable">Date</th>
+                                                    <th>Status </th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach(var i in Model)
+                                                {
+                                                    <tr>
+
+                                                        @* <td class="align-middle text-center">
+                                                            <div class="bg-light d-inline-flex justify-content-center align-items-center align-top" style="width: 35px; height: 35px; border-radius: 3px;">
+                                                                <img src="~/image//chovy1.jpg" alt="@i.Username" style="opacity: 1; width: 100%; height: 100%;">
+                                                            </div>
+                                                        </td> *@
+                                                        <td class="text-nowrap align-middle">@i.ID</td>
+                                                        <td class="text-nowrap align-middle">@i.Username</td>
+                                                        <td class="text-nowrap align-middle"><span>@i.CreatedAt</span></td>
+                                                        @if( i.IsBanned == false)
+                                                        {
+                                                            <td class="text-center align-middle"><i class="fa fa-fw text-secondary cursor-pointer fa-toggle-on"></i></td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="text-center align-middle"><i class="fa fa-fw text-secondary cursor-pointer fa-toggle-off"></i></td>
+                                                        }
+
+                                                        <td class="text-center align-middle">
+                                                            <div class="btn-group align-top">
+                                                                <a asp-controller="Admin" asp-action="UserDetail" asp-route-id="@i.ID">
+                                                                    <button class="btn btn-sm btn-outline-secondary badge" type="button">Detail</button>
+                                                                </a>
+                                                                <a asp-controller="Admin" asp-action="Edit" asp-route-id="@i.ID" >
+                                                                    <button class="btn btn-sm btn-outline-secondary badge" type="button"  >Edit</button>
+                                                                </a>
+                                                                <a asp-controller="Admin" asp-action="Delete" asp-route-id="@i.ID">
+                                                                    <button class="btn btn-sm btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
+                                                                </a>
+                                                                
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                               
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="text-center px-xl-3">
+                                    <a style="background-color:black;" class="btn btn-success btn-block" type="button" asp-controller="Admin" asp-action="Create">New User</a>
+                                </div>
+                                <hr class="my-3">
+                                
+                                <hr class="my-3">
+                                <div>
+                                    
+                                    <div class="form-group">
+                                        <label>Search by Name:</label>
+                                        <div><input id="searchnamebox" class="form-control w-100" type="text" placeholder="Name" value></div>
+                                    </div>
+                                </div>
+                                <hr class="my-3">
+                                <div class>
+   @*     dksajdsajdas       *@                       <label>Status:</label>
+                                    <div class="px-2">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" name="user-status" id="users-status-disabled" value="Disabled">
+                                            <label class="custom-control-label" for="users-status-disabled">Disabled</label>
+                                        </div>
+                                    </div>
+                                    <div class="px-2">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" name="user-status" id="users-status-active" value="Active">
+                                            <label class="custom-control-label" for="users-status-active">Active</label>
+                                        </div>
+                                    </div>
+                                    <div class="px-2">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" name="user-status" id="users-status-any" checked>
+                                            <label class="custom-control-label" for="users-status-any">Any</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
     </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script >
+        $(document).ready(function () {
+            function filterUser(searchTerm, seletedStatus) {
+                console.log("Filtering user...", searchTerm, seletedStatus);
+
+                $.ajax({
+                    url: '@Url.Action("FilterUser", "Admin")',
+                    type: 'GET',
+                    traditional: true,
+                    data: {
+                        searchTerm: searchTerm,
+                        seletedStatus: seletedStatus,
+
+                    },
+                    success: function (result) {
+                        $('#userlistcontainer').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Error:", error);
+                    }
+                });
+            }
+            function applyFilters() {
+            var searchTerm=$('#searchnamebox').val();
+                var seletedStatus = $('.custom-control-input:checked').val();
+
+                filterUser(searchTerm, seletedStatus);
+
+            }
+            $('#searchnamebox').on('keyup', function () {
+                applyFilters();
+            });
+            $('.custom-control-input').change(function () {
+                applyFilters();
+            });
+           
+        });
+    </script>
 </body>
 </html>
 <style>

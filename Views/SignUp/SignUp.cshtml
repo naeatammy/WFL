@@ -27,19 +27,18 @@
                     <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
                 <div class="input-box">
-                    <input asp-for="Email" type="text" placeholder="Email" required>
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <input asp-for="Email" type="email" placeholder="Email" >
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="input-box">
                     <input asp-for="Password" type="password" placeholder="Password" required>
                 </div>
                 <div>
                     <label>
-                        <input type="checkbox"> I agree to the <a href="#">term of service</a> and  <a href="#">privacy policy</a>
+                        <input type="checkbox" required> I agree to the <a href="#">term of service</a> and  <a href="#">privacy policy</a>
                     </label>
                 </div>
                 <button type="submit" class="btn">Sign Up</button>
-
             </form>
 
         </div>

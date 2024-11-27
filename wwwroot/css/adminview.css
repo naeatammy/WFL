@@ -85,7 +85,19 @@ h2::before {
     flex: 1;
     align-items: center;
     justify-content: flex-end;
+   
 }
+    .right a {
+        color: black;
+        text-decoration: none;
+        font-size: 20px;
+        transition: 0.2s;
+    }
+        .right a :hover {
+            text-decoration: none;
+            color: blueviolet;
+        }
+
 
 .Browse {
     padding: 12px 12px;

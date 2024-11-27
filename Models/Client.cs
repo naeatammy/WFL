@@ -10,7 +10,7 @@ namespace PBL3.Models
 		public virtual User User { get; set; }
 		
 		public string? Location { get; set; }
-		public int? Rating { get; set; }
+		public float? Rating { get; set; }
 		public string? Description { get; set; }
 		
 		public List<Job> jobs { get; set; }

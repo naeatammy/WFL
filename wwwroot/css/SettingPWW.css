@@ -1,0 +1,179 @@
+﻿
+
+#WFL.menuText {
+    position: absolute;
+    bottom: auto;
+    top: -3px;
+    left: 15px;
+}
+
+#Browse.menuText {
+    font-size: 20px;
+    position: absolute;
+    bottom: auto;
+    top: 5px;
+    left: 150px;
+}
+
+#pAP.menuText {
+    font-size: 20px;
+    position: absolute;
+    bottom: auto;
+    top: 5px;
+    left: 240px;
+    cursor: pointer;
+}
+
+#noti {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 9px;
+    left: 1215px;
+    cursor: pointer;
+}
+
+.menucpn {
+    margin-left: 120px;
+}
+
+#folder {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 9px;
+    left: 1270px;
+    cursor: pointer;
+}
+
+#profile {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: 9px;
+    left: 1320px;
+    cursor: pointer;
+}
+
+#profile_name.menucpn {
+    font-size: 20px;
+    position: absolute;
+    top: 15px;
+    left: 1240px;
+    cursor: pointer;
+}
+
+#profile_tab.tab {
+    font-size: 20px;
+    position: absolute;
+    left: 80px;
+    top: 120px;
+    cursor: pointer;
+}
+
+#password.tab {
+    font-size: 20px;
+    position: absolute;
+    left: 80px;
+    top: 170px;
+}
+
+#tab_select {
+    position: absolute;
+    left: 60px;
+    top: 169px;
+}
+
+#password.contents {
+    width: 70vw;
+    height: 70vh;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    margin-left: 250px;
+    margin-top: 50px;
+}
+
+#textpassword.contents {
+    font-size: 28px;
+    padding-left: 33px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+#changepw.contents {
+    margin-top: 30px;
+    margin-left: 40px;
+}
+
+#currentpw.contents {
+    position: relative;
+    left: 43px;
+    top: 10px;
+    margin-top: 30px;
+}
+
+#text_crpw.contents {
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    width: 30%;
+    height: 36px;
+    margin-left: 4%;
+    position: relative;
+    top: 10px;
+}
+
+#newpw.contents {
+    position: relative;
+    left: 43px;
+    top: 10px;
+    margin-top: 30px;
+}
+
+#text_npw.contents {
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    width: 30%;
+    height: 36px;
+    margin-left: 4%;
+    position: relative;
+    top: 10px;
+}
+
+#confirmpw.contents {
+    position: relative;
+    left: 43px;
+    top: 10px;
+    margin-top: 30px;
+}
+
+#text_cpw.contents {
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    width: 30%;
+    height: 36px;
+    margin-left: 4%;
+    position: relative;
+    top: 10px;
+}
+
+#checktext1 {
+    position: absolute;
+    left: 20%;
+    top: 320px;
+}
+
+#checktext2 {
+    position: absolute;
+    left: 20%;
+}
+
+#save.contents {
+    width: 15%;
+    height: 8%;
+    background-color: black;
+    color: white;
+    font-family: 'Inria Sans';
+    font-size: 18px;
+    border-radius: 5px;
+    position: relative;
+    top: 8%;
+    left: 42%;
+    cursor: pointer;
+}

@@ -1,0 +1,75 @@
+﻿@{
+    Layout = ViewData["Layout"] as string;
+}
+@model List<User>
+
+    <div class="card-title">
+        <h6 class="mr-2"><span>Users</span><small class="px-1">Be a wise leader</small></h6>
+    </div>
+    <div class="e-table">
+        <div class="table-responsive table-lg mt-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+
+                        <th>Photo</th>
+                        <th class="max-width">Name</th>
+                        <th class="sortable">Date</th>
+                        <th>Status </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var i in Model)
+                    {
+                        <tr>
+
+                            <td class="align-middle text-center">
+                                <div class="bg-light d-inline-flex justify-content-center align-items-center align-top" style="width: 35px; height: 35px; border-radius: 3px;">
+                                    <img src="~/image//chovy1.jpg" alt="@i.Username" style="opacity: 1; width: 100%; height: 100%;">
+                                </div>
+                            </td>
+                            <td class="text-nowrap align-middle">@i.Username</td>
+                            <td class="text-nowrap align-middle"><span>@i.CreatedAt</span></td>
+                            @if (i.IsBanned == false)
+                            {
+                                <td class="text-center align-middle"><i class="fa fa-fw text-secondary cursor-pointer fa-toggle-on"></i></td>
+                            }
+                            else
+                            {
+                                <td class="text-center align-middle"><i class="fa fa-fw text-secondary cursor-pointer fa-toggle-off"></i></td>
+                            }
+
+                            <td class="text-center align-middle">
+                                <div class="btn-group align-top">
+                                    <a asp-controller="Admin" asp-action="Edit" asp-route-id="@i.ID">
+                                        <button class="btn btn-sm btn-outline-secondary badge" type="button">Edit</button>
+                                    </a>
+                                    <a asp-controller="Admin" asp-action="Delete" asp-route-id="@i.ID">
+                                        <button class="btn btn-sm btn-outline-secondary badge" type="button"><i class="fa fa-trash"></i></button>
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        @*  <div class="d-flex justify-content-center">
+        <ul class="pagination mt-3 mb-0">
+        <li class="disabled page-item"><a href="#" class="page-link">‹</a></li>
+        <li class="active page-item"><a href="#" class="page-link">1</a></li>
+        <li class="page-item"><a href="#" class="page-link">2</a></li>
+        <li class="page-item"><a href="#" class="page-link">3</a></li>
+        <li class="page-item"><a href="#" class="page-link">4</a></li>
+        <li class="page-item"><a href="#" class="page-link">5</a></li>
+        <li class="page-item"><a href="#" class="page-link">›</a></li>
+        <li class="page-item"><a href="#" class="page-link">»</a></li>
+        </ul>
+        </div> *@
+    </div>
+</div>

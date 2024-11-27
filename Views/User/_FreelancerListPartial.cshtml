@@ -1,0 +1,23 @@
+﻿@using PBL3.ViewModels
+@model List<BrowseFreelancerView>
+@foreach (var freelancer in Model)
+{
+    <div class="col-md-12 mb-4">
+        <a href="@Url.Action("FreelancerDetail", "User", new { id = freelancer.freelancer.FreelancerID })" class="freelancer-card">
+            <img src="~/image/cropped-1920-1080-1339443.png" alt="@freelancer.freelancer.User.Username" />
+            <div>
+                <h5>@freelancer.freelancer.User.Username</h5>
+
+                <p><strong>Rating:</strong> @freelancer.freelancer.Rating</p>
+                <p><strong>Country:</strong> @freelancer.freelancer.Location</p>
+                <p><strong>Description:</strong> @freelancer.freelancer.Description</p>
+                <div class="skills">
+                    @foreach (var skill in freelancer.FreelancerSkill)
+                    {
+                        <span>@skill</span>
+                    }
+                </div>
+            </div>
+        </a>
+    </div>
+}

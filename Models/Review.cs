@@ -14,11 +14,15 @@ namespace PBL3.Models
 		[ForeignKey("Freelancer")]
 		public int FreelancerID { get; set; }
 		public Freelancer Freelancer { get; set; }
-		[ForeignKey("Client")]
-		public int ClientID { get; set; } 
-		public Client Client { get; set; }
-		public DateTime ReviewTime { get; set; }
+        [ForeignKey("Client")]
+        public int ClientID { get; set; }
+        public Client Client { get; set; }
+
+
+        public DateTime ReviewTime { get; set; }
 		public int Grade { get; set; }
 		public string Comment { get; set; }
+		public string ReviewType { get; set; }
+	
 	}
 }

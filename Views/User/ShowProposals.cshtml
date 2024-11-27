@@ -1,0 +1,208 @@
+﻿@{
+    Layout = "headerlayout";
+    var jobId = ViewBag.JobId;
+    int? RewardFreelancerID = Model.FirstOrDefault()?.Job?.freelancerID ?? null;
+}
+@using PBL3.ViewModels
+@model List<JobRegistration>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Proposals</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/ShowProposal.css">
+    <style>
+        /* Add your CSS styles here */
+    </style>
+</head>
+<body>
+    
+    @* <div class="tag">
+        @if (jobId != null)
+        {
+            <a class="Jobdetailtag" href="@Url.Action("JobDetail", "User", new { id = jobId })"><strong>Job Detail</strong></a>
+        }
+        <p class="Proposaltag"><strong>Proposal</strong></p>
+    </div> *@
+
+    <div class="tag" style=",margin-left: 10px; margin-top: 50px;">
+        @if (jobId != null)
+        {
+            <a class="Jobdetailtag" href="@Url.Action("JobDetail", "User", new { id = jobId })" style="height: 40px; padding: 0px 5px 0px 5px;"> <strong>Job Detail</strong>  </a>
+        }
+        <p class="Proposaltag" style="height: 40px; padding: 0px 5px 0px 5px; border-bottom: 5px solid black;"><strong>Proposals</strong></p>
+    </div>
+    <style>
+        .tag {
+            padding-left: 50px;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .Proposaltag {
+            margin-left: 30px;
+            font-size: 23px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .Jobdetailtag {
+            font-size: 23px;
+            color: black;
+        }
+
+            .Jobdetailtag:hover {
+                color: black;
+                border-bottom: 5px solid black;
+            }
+    </style>
+
+    <div class="freelancer-container">
+        @if (Model != null && Model.Any())
+        {
+            <div>
+                @if (Model.FirstOrDefault()?.Job?.freelancerID == null)
+                {
+                    @foreach (var freelancer in Model)
+                    {
+                        if (freelancer.Job.ClientId != ViewBag.currentUserID)
+                        {
+                            <div class="content">
+                                <a href="@Url.Action("FreelancerDetail", "User", new { id = freelancer.freelancer.FreelancerID })" class="freelancer-card">
+                                    <div><img class="image" src="~/image/cropped-1920-1080-1339443.png" /></div>
+                                    <div class="freelancer-info">
+                                        <h5 class="txt">@freelancer.freelancer.User.Username</h5>
+                                        <p class="txt"><strong>Rating:</strong> @freelancer.freelancer.Rating</p>
+                                        <p class="txt"><strong>Country:</strong> @freelancer.freelancer.Location</p>
+                                        <p class="txt"><strong>Description:</strong> @freelancer.freelancer.Description</p>
+                                        <div class="skills">
+                                            @foreach (var skill in freelancer.freelancer.hasskills)
+                                            {
+                                                <span>@skill.Skill.Name</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </a>
+                                @if (freelancer.FreelancerID == ViewBag.currentUserID)
+                                {
+                                    <div class="button-container">
+                                        <form asp-controller="User" asp-action="DeleteProposal" asp-route-jobID="@freelancer.JobID" asp-route-freelancerID="@freelancer.FreelancerID">
+                                            <button class="btn btn-dark">Delete</button>
+                                        </form>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="content">
+                                <a href="@Url.Action("FreelancerDetail", "User", new { id = freelancer.freelancer.FreelancerID })" class="freelancer-card">
+                                    <div><img class="image" src="~/image/cropped-1920-1080-1339443.png" /></div>
+                                    <div class="freelancer-info">
+                                        <h5 class="txt">@freelancer.freelancer.User.Username</h5>
+                                        <p class="txt"><strong>Rating:</strong> @freelancer.freelancer.Rating</p>
+                                        <p class="txt"><strong>Country:</strong> @freelancer.freelancer.Location</p>
+                                        <p class="txt"><strong>Description:</strong> @freelancer.freelancer.Description</p>
+                                        <div class="skills">
+                                            @foreach (var skill in freelancer.freelancer.hasskills)
+                                            {
+                                                <span>@skill.Skill.Name</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </a>
+                                @* <div class="button-container">
+                                    <form asp-controller="User" asp-action="ApplyFreelancerForJob" asp-route-jobID="@freelancer.JobID" asp-route-freelancerID="@freelancer.FreelancerID">
+                                        <button class="btn btn-dark">dong y</button>
+                                    </form>
+                                </div>
+                                <div class="button-container">
+                                    <form asp-controller="User" asp-action="DeleteProposal" asp-route-jobID="@freelancer.JobID" asp-route-freelancerID="@freelancer.FreelancerID">
+                                        <button class="btn btn-dark">xoa</button>
+                                    </form>
+                                </div> *@
+                                <div style="display: flex; margin-left:100px;">
+                                    <div class="button-container" style="margin-left: 77%">
+                                        <form asp-controller="User" asp-action="ApplyFreelancerForJob" asp-route-jobID="@freelancer.JobID" asp-route-freelancerID="@freelancer.FreelancerID">
+                                            <button class="btn btn-dark">Accept</button>
+                                        </form>
+                                    </div>
+                                    <div class="button-container" style="margin-left: 50px">
+                                        <form asp-controller="User" asp-action="DeleteProposal" asp-route-jobID="@freelancer.JobID" asp-route-freelancerID="@freelancer.FreelancerID">
+                                            <button class="btn btn-dark">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+       
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    var rewardedFreelancer = Model.Where(x => x.Job.freelancerID == RewardFreelancerID && x.freelancer.FreelancerID == RewardFreelancerID).FirstOrDefault();
+                    <p class="proposalfree"> <strong>Reward Freelancers</strong></p>
+                    <div class="content">
+                      
+                        <a href="@Url.Action("FreelancerDetail", "User", new { id = rewardedFreelancer.freelancer.FreelancerID })" class="freelancer-card">
+                            <div><img class="image" src="~/image/cropped-1920-1080-1339443.png" /></div>
+                            <div class="freelancer-info">
+                                <h5 class="txt">@rewardedFreelancer.freelancer.User.Username</h5>
+                                <p class="txt"><strong>Rating:</strong> @rewardedFreelancer.freelancer.Rating</p>
+                                <p class="txt"><strong>Country:</strong> @rewardedFreelancer.freelancer.Location</p>
+                                <p class="txt"><strong>Description:</strong> @rewardedFreelancer.freelancer.Description</p>
+                                <div class="skills">
+                                    @foreach (var skill in rewardedFreelancer.freelancer.hasskills)
+                                    {
+                                        <span>@skill.Skill.Name</span>
+                                    }
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <p class="proposalfree"> <strong>Other Proposals</strong></p>
+                    @foreach (var freelancer in Model)
+                    {
+                        if (freelancer.freelancer.FreelancerID != RewardFreelancerID)
+                        {
+                            <div class="content">
+                                <a href="@Url.Action("FreelancerDetail", "User", new { id = freelancer.freelancer.FreelancerID })" class="freelancer-card">
+                                    <div><img class="image" src="~/image/cropped-1920-1080-1339443.png" /></div>
+                                    <div class="freelancer-info">
+                                        <h5 class="txt">@freelancer.freelancer.User.Username</h5>
+                                        <p class="txt"><strong>Rating:</strong> @freelancer.freelancer.Rating</p>
+                                        <p class="txt"><strong>Country:</strong> @freelancer.freelancer.Location</p>
+                                        <p class="txt"><strong>Description:</strong> @freelancer.freelancer.Description</p>
+                                        <div class="skills">
+                                            @foreach (var skill in freelancer.freelancer.hasskills)
+                                            {
+                                                <span>@skill.Skill.Name</span>
+                                            }
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        }
+        else
+        {
+            <div>
+                <p>No proposals found. Redirecting to job details...</p>
+                @if (jobId != null)
+                {
+                    <script>
+                        setTimeout(function () {
+                            window.location.href = '@Url.Action("JobDetail", "User", new { id = jobId })';
+                        }, 3000);
+                    </script>
+                }
+            </div>
+        }
+    </div>
+</body>
+</html>

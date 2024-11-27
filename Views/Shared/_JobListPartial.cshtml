@@ -1,0 +1,46 @@
+﻿
+@using PBL3.ViewModels
+@model List<BrowseJobView>
+@foreach (var job in Model)
+{
+    if (job.job.ClientId != ViewBag.CurrentUserId)
+    {
+        <div class="col-md-12 mb-4">
+            <a href="@Url.Action("JobDetail", "User", new { id = job.job.ID })" class="freelancer-card">
+                <div>
+                    <h5>@job.job.Name</h5>
+                    <p><strong>PaymentType:</strong> @job.job.PaymentType</p>
+                    <p><strong>PaymentAmount:</strong> @job.job.PaymentAmount$</p>
+                    <p><strong>Description:</strong> @job.job.Description</p>
+                    <div class="skills">
+                        @foreach (var i in job.SkillName)
+                        {
+                            <span>@i</span>
+                        }
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="col-md-12 mb-4">
+            <a href="@Url.Action("JobDetail", "User", new { id = job.job.ID })" class="freelancer-card">
+                <div>
+                    <h5>@job.job.Name</h5>
+                    <p><strong>PaymentType:</strong> @job.job.PaymentType</p>
+                    <p><strong>PaymentAmount:</strong> @job.job.PaymentAmount$</p>
+                    <p><strong>Description:</strong> @job.job.Description</p>
+                    <div class="skills">
+                        @foreach (var i in job.SkillName)
+                        {
+                            <span>@i</span>
+                        }
+                    </div>
+                    <p><strong>This is ur Project</strong> </p>
+                </div>
+            </a>
+        </div>
+    }
+
+}

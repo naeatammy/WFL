@@ -1,0 +1,146 @@
+﻿@{
+	Layout = null;
+}
+@using PBL3.ViewModels
+@model ProfileViewModel
+
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <title>WFL</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/css/MyProfile.css">
+    <style>
+        import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+        body {
+            font-family: "Inria Sans", sans-serif;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="menu"> </div>
+    <!-- Menu -->
+    <div class="menulist">
+        <div>
+            <h1 id="WFL" class="menuText" style="font-style: italic;">
+                WFL.com
+            </h1>
+            <h1 id="Browse" , class="menuText">
+                Browse
+            </h1>
+            <h1 id="pAP" , class="menuText">
+                Post a project
+            </h1>
+        </div>
+        <div>
+            <div id="noti" , class="menucpn">
+            </div>
+            <div id="folder" , class="menucpn">
+            </div>
+            <div id="profile" , class="menucpn">
+            </div>
+            <div id="profile_name" , class="menucpn">
+                @Model.freelancer.User.Username
+            </div>
+        </div>
+    </div>
+
+
+    
+    
+    <!-- contents -->
+    <div id="profile_box" , class="contents">
+       
+        <div id="profile_image">
+            <img  src="~/image/chovy1.jpg" >
+        </div>
+
+        <div>
+            <div id="username">
+               @Model.freelancer.User.FirstName 
+            </div>
+            <div id="username1">
+                @Model.freelancer.User.Username
+            </div>
+        </div>
+        <div id="star1" , class="star"></div>
+        <div id="star2" , class="star"></div>
+        <div id="star3" , class="star"></div>
+        <div id="star4" , class="star"></div>
+        <div id="star5" , class="star"></div>
+        <div id="point">
+            0.0(0 reviews)
+        </div>
+        <div id="Jobcompleted">
+            Job completed : @Model.jobcount
+        </div>
+       <div class="Description">
+           <p>@Model.freelancer.Description</p>
+       </div>
+      
+    </div>
+   
+    <div id="reviewBox" , class="contents">
+        <h1 id="textreviewbox" , class="contents">
+            Review
+        </h1>
+        <h2 id="textreviewboxNull" , class="contents">
+            No reviews to see here
+        </h2>
+    </div>
+
+    
+   
+    
+    <div id="topskill" , class="contents">
+        <h1 id="text_topskill" , class="contents">
+            Top skills
+        </h1>
+
+        @if(Model.freelancer.hasskills == null)
+        {
+            <h2 id="text_topskillNull" , class="contents">
+                Your skills are displayed here
+            </h2>
+        }
+        else
+
+        {
+            foreach (var i in Model.freelancer.hasskills)
+            {
+                <p>@i.Skill.Name</p>
+            }
+        }
+
+    </div>
+
+   
+   
+   
+    <button id="buttonAdd4" style="font-family: 'Inria Sans';">
+        Add
+    </button>
+    <button id="buttonEdit" style="font-family: 'Inria Sans';">
+        Edit
+    </button>
+    <button id="buttonEditProfile" style="font-family: 'Inria Sans';">
+        Edit Profile
+    </button>
+    <button class="Changebtn" style="font-family: 'Inria Sans';">
+        View Client Profile
+    </button>
+    
+    <div class="background">
+    </div>
+    <div style="padding-bottom: 1850px;">
+    </div>
+</body>
+
+</html>

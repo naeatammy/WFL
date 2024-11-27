@@ -1,0 +1,360 @@
+﻿.menu {
+    display: flex;
+    background-color: #fff;
+    width: 100vw;
+    height: 6vh;
+    color: black;
+    border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: black;
+}
+
+.menuText {
+    font-size: 25px;
+    margin-left: 20px;
+}
+
+#WFL.menuText {
+    position: absolute;
+    bottom: auto;
+    top: -3px;
+    left: 15px;
+}
+
+#Browse.menuText {
+    font-size: 20px;
+    position: absolute;
+    bottom: auto;
+    top: 5px;
+    left: 150px;
+}
+
+#pAP.menuText {
+    font-size: 20px;
+    position: absolute;
+    bottom: auto;
+    top: 5px;
+    left: 240px;
+}
+
+#noti.menucpn {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    background-image: url(https://cdn-icons-png.flaticon.com/512/3119/3119338.png);
+    background-size: 100%;
+    position: absolute;
+    top: 9px;
+    left: 1100px;
+}
+
+.menucpn {
+    margin-left: 120px;
+}
+
+#folder.menucpn {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    background-image: url(https://cdn-icons-png.flaticon.com/512/1383/1383970.png);
+    background-size: 100%;
+    position: absolute;
+    top: 9px;
+    left: 1150px;
+}
+
+#profile.menucpn {
+    width: 36px;
+    height: 36px;
+    background-color: white;
+    background-image: url(https://cdn-icons-png.freepik.com/512/6596/6596121.png);
+    background-size: 100%;
+    position: absolute;
+    top: 9px;
+    left: 1200px;
+}
+
+#profile_name.menucpn {
+    font-size: 20px;
+    position: absolute;
+    top: 15px;
+    left: 1240px;
+}
+
+.background {
+    width: 100vw;
+    height: 30vh;
+    background-image: url(https://didongviet.vn/dchannel/wp-content/uploads/2023/11/New-Project-8-24-1024x576.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#profile_box.contents {
+    position: absolute;
+    top: 185px;
+    left: 50px;
+    width: 65vw;
+    height: 70vh;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+
+
+
+
+
+#topskill.contents {
+    position: absolute;
+    top: 185px;
+    left: 1100px;
+    width: 25vw;
+    height: 45vh;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+#text_topskill.contents {
+    padding: 0px 0px 10px 20px;
+    font-size: 25px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+#text_topskillNull.contents {
+    font-size: 20px;
+    position: absolute;
+    left: 60px;
+    top: 170px;
+}
+
+#profile_image {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 250px;
+    height: 280px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background-image: url(https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/401080721_1102448260743296_5808837567105152706_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEPVoyL3PNUYJvxc5EWXjLiLheSfenMAfEuF5J96cwB8cJrGieZIk-k_iALMcf70bvjq_8pXar69fnsdIzaojM0&_nc_ohc=92yJ4gchELEAb6AGElw&_nc_ht=scontent.fdad1-1.fna&oh=00_AfAo2SLEQYL_5qTxNXZpkq38M79JLONTc9pHcloGxX5qqA&oe=662BA3AC);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+#username {
+    font-size: 25px;
+    position: absolute;
+    left: 400px;
+    top: 40px;
+}
+
+#username1 {
+    font-size: 25px;
+    position: absolute;
+    left: 560px;
+    top: 40px;
+}
+
+.star {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    background-image: url(https://cdn-icons-png.freepik.com/256/10944/10944634.png?semt=ais_hybrid);
+    background-size: 100%;
+    float: left;
+}
+
+#star1.star {
+    position: absolute;
+    left: 400px;
+    top: 80px;
+}
+
+#star2.star {
+    position: absolute;
+    left: 440px;
+    top: 80px;
+}
+
+#star3.star {
+    position: absolute;
+    left: 480px;
+    top: 80px;
+}
+
+#star4.star {
+    position: absolute;
+    left: 520px;
+    top: 80px;
+}
+
+#star5.star {
+    position: absolute;
+    left: 560px;
+    top: 80px;
+}
+
+#point {
+    font-size: 20px;
+    position: absolute;
+    left: 630px;
+    top: 85px;
+}
+
+#Jobcompleted {
+    font-size: 23px;
+    position: absolute;
+    left: 400px;
+    top: 140px;
+}
+
+
+
+
+
+
+#reviewBox.contents {
+    position: absolute;
+    top: 710px;
+    left: 50px;
+    width: 65vw;
+    height: 30vh;
+    background-color: white;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+#textreviewbox {
+    font-size: 25px;
+    padding: 0px 0px 10px 20px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+#textreviewboxNull {
+    font-size: 20px;
+    position: absolute;
+    left: 375px;
+    top: 140px;
+}
+.Changebtn {
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    position: absolute;
+    left: 850px;
+    top: 125px;
+    transition: transform 0.25s; /* Thêm transform để chuyển đổi */
+}
+
+    .Changebtn:active {
+        transform: scale(0.95);
+    }
+
+
+
+
+
+
+#buttonAdd {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 1250px;
+    top: 430px;
+}
+
+#buttonAdd1 {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 943px;
+    top: 620px;
+}
+
+#buttonAdd2 {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 943px;
+    top: 1220px;
+}
+
+#buttonAdd3 {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 943px;
+    top: 1520px;
+}
+
+#buttonAdd4 {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 943px;
+    top: 1820px;
+}
+
+#buttonEdit {
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 1378px;
+    top: 195px;
+}
+
+#buttonEditProfile {
+    width: 150px;
+    height: 50px;
+    border-radius: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 850px;
+    top: 230px;
+}
+
+body {
+    margin: 0px;
+}
+#profile_image img {
+    max-width: 100%; /* hình ảnh sẽ không vượt quá kích thước của div */
+    height: 100%; /* để giữ tỷ lệ hình ảnh */
+    display: block; /* để loại bỏ dư thừa không mong muốn */
+}   
+.Description
+{
+    border-top: 1px solid gray;
+    margin-left:300px;
+    margin-top: 200px;
+    margin-right:10px;
+    height:270px;
+}

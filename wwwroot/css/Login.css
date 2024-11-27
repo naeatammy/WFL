@@ -94,3 +94,10 @@ a {
 .Register-link{
     text-align: center;
 }
+
+.txt{
+    margin-top: 40px;
+}
+.textdanger{
+    color: red;
+}

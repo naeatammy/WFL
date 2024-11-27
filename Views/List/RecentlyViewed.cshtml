@@ -1,0 +1,298 @@
+﻿
+@{
+    ViewData["Title"] = "RecentlyViewed";
+    Layout = "~/Views/Shared/RecentlyViewed.cshtml";
+}
+
+@model IEnumerable<PBL3.ViewModels.FreelancerVM>
+@using PBL3.ViewModels
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+
+<div class="menu"> </div>
+<div class="menulist">
+    <div>
+        <a href="@Url.Action("Favourite", "List")" id="WFL" class="menuText" style="font-style: italic; color: black; text-decoration: none; font-weight: bold; margin-top: 12px;">
+            WFL.com
+        </a>
+        <div id="Browse" , class="menuText" , style="font-weight: bold; cursor: pointer; padding-bottom: 50px; margin-top: 7px;">
+            Browse
+            <div id="browseBox">
+                <div id="triangle1"></div>
+                <div id="browseBox_searchbox">
+                    <i class='bx bx-search-alt-2' style="margin-left: 17px;"></i>
+                    <input id="browseBox_search" oninput="updateBrowse()" type="text" placeholder="Searchs Projects or Freelancers">
+                    <div id="container" style="display: flex;">
+                        <div class="sub_container"
+                             style="margin-top: 50px; margin-left: 120px; width: 200px; place-items: center; cursor: pointer;">
+                            <img src="~/image/project.png" style="width: 32px; height: 32px; padding-left: 85px;">
+                            <p style="flex-wrap: wrap; text-align: center;">
+                                <a href="@Url.Action("BrowseFreelancer", "User")">
+                                    Explore exciting new project
+                                    opportunities now
+                                </a>
+                            </p>
+                        </div>
+                        <div class="sub_container"
+                             style="margin-top: 50px; margin-left: 30px; width: 200px; place-items: center; cursor: pointer;">
+                            <img src="~/image/ava.png" style="width: 32px; height: 32px; padding-left: 85px;">
+                            <p style="flex-wrap: wrap; text-align: center;">
+                                <a href="@Url.Action("BrowseJob", "User")">
+                                    Find top-rated freelancer for your
+                                    project
+                                </a>
+
+                            </p>
+                        </div>
+                    </div>
+                    <style>
+                        a {
+                            color: black;
+                            text-decoration: none;
+                        }
+
+                        #triangle1 {
+                            width: 0;
+                            height: 0;
+                            border-left: 15px solid transparent;
+                            border-right: 15px solid transparent;
+                            border-bottom: 30px solid white;
+                            position: absolute;
+                            top: -20px;
+                            left: 40px;
+                        }
+
+                        #browseBox {
+                            visibility: hidden;
+                            position: absolute;
+                            left: -30px;
+                            top: 50px;
+                            background-color: white;
+                            width: 50vw;
+                            height: 60vh;
+                            box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.3);
+                        }
+
+                        #browseBox_search {
+                            font-size: 20px;
+                            width: 88%;
+                            height: 40px;
+                            margin-top: 3.5px;
+                            outline: none;
+                            border: none;
+                        }
+
+                        #browseBox_searchbox {
+                            border: 2px solid rgba(0, 0, 0, 0.3);
+                            border-radius: 30px;
+                            width: 88%;
+                            height: 50px;
+                            margin-left: 20px;
+                            margin-top: 20px;
+                        }
+
+                    </style>
+                    <script>
+                        function updateBrowse() {
+                            var browseText = document.getElementById("browseBox_search").value;
+                            var formData = new FormData();
+                            formData.append("text", browseText);
+                            fetch('@Url.Action("UpdateBrowse", "MyProject")', {
+                                method: 'POST',
+                                body: formData
+                            })
+                                .then(response => response.text())
+                                .then(data => {
+                                    document.getElementById("container").innerHTML = data;
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        }
+                    </script>
+                </div>
+            </div>
+            <script>
+                var browse = document.getElementById("Browse");
+                browse.onmouseover = function () {
+                    document.getElementById("browseBox").setAttribute("style", "visibility: unset;");
+                }
+                browse.onmouseout = function () {
+                    document.getElementById("browseBox").setAttribute("style", "visibility: hidden;");
+                }
+            </script>
+        </div>
+        <a href="@Url.Action("PostAProject", "Post")" id="pAP" , class="menuText" , style="cursor: pointer; color: black; text-decoration: none; margin-top: 7px; font-weight: bold;">
+            Post a project
+        </a>
+    </div>
+    <div>
+        <div>
+            <img src="~/image/noti.png" id="noti">
+        </div>
+        <div>
+            <img src="~/image/folder.png" id="folder">
+        </div>
+        <div>
+            <img src="~/image/ava.png" id="profile">
+        </div>
+        <div id="profile_name_box">
+            <div id="profile_name" , class="menucpn" style="padding-bottom: 50px;">
+                @ViewBag.Username
+                <div id="profile_menu_box" style="visibility: hidden">
+                    <div id="triangle2"></div>
+                    <div id="profile_menu" style="position: absolute; background-color: white; box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.3);">
+                        <div id="edit_profile" class="content_menu">
+                            <a href="@Url.Action("Profile", "User")" class="menu_text" style="color: black; text-decoration: none;">Edit Profile</a>
+                        </div>
+                        <div id="change_password" class="content_menu">
+                            <a href="@Url.Action("ChangePassword", "User")" class="menu_text" style="color: black; text-decoration: none;">Change Password</a>
+                        </div>
+                        <div id="log_out" class="content_menu">
+                            <a href="@Url.Action("LogOut", "LogIn")" class="menu_text" style="color: black; text-decoration: none;">Log out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                #profile_menu {
+                    top: 40px;
+                    width: 150px;
+                }
+
+                .content_menu {
+                    font-size: 15px;
+                    padding: 10px;
+                }
+
+                    .content_menu:hover {
+                        background-color: #f0f0f0;
+                    }
+
+                .menu_text {
+                    color: black;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+
+                #triangle2 {
+                    width: 0;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 20px solid white;
+                    position: absolute;
+                    left: 20px;
+                    z-index: 0;
+                }
+            </style>
+            <script>
+                var profile_menu = document.getElementById("profile_name");
+                profile_menu.onmouseover = function () {
+                    document.getElementById("profile_menu_box").setAttribute("style", "visibility: unset;");
+                }
+
+                profile_menu.onmouseout = function () {
+                    document.getElementById("profile_menu_box").setAttribute("style", "visibility: hidden");
+                }
+            </script>
+        </div>
+    </div>
+</div>
+<div class="banner">
+    <div class="blackmenu">
+        <a class="listtag" href="@Url.Action("Favourite", "List")">List</a>
+        <a class="myprojecttag" href="@Url.Action("ClientMyProjectOpenProject", "MyProject")">My Projects</a>
+        
+    </div>
+    <div class="content">
+        <div class="leftcontent">
+            <div class="Tag1">List</div>
+            <div class="Tag2">Users</div>
+            <div class="listitem">
+
+                <div class="favoritetag">
+                    <i class='bx bx-heart'></i>
+                    <a class="favorite" href="@Url.Action("Favourite", "List")">Favourite</a>
+                </div>
+                <div class="myhirestag">
+                    <i class='bx bxs-briefcase'></i>
+                    <a class="myhires" href="@Url.Action("MyHires", "List")">My Hires</a>
+                </div>
+                <div class="recentlyviewedtag">
+                    <img src="~/image/eyeicon.png" class="eyeicon">
+                    <a class="recentlyviewed" href="@Url.Action("RecentlyViewed", "List")">Recently Viewed</a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="rightcontent">
+            <div class="Tag1">
+                Recently Viewed
+                <p id="tag1_text">Here you can find user whose profile you have recently viewed</p>
+            </div>
+            @if(@Model.Count() == 0)
+            {
+                <div>
+                    <h1 id="text1"> This list is empty </h1>
+                </div>
+                <div>
+                    <p class="text">Users will appear here after you have visited their profile</p>
+                </div>
+                <form>
+                    <Button asp-controller="User" asp-action="BrowseFreelancer" id="bf" class="btn" style="margin-left: 450px; margin-top: 50px;">
+                        Browse Freelancers
+                    </Button>
+                </form>
+            }
+            else
+            {
+               @*  @foreach (var item in Model)
+                {
+                    <div class="freelancers">
+                        <a href="@Url.Action("FreelancerDetail", "User", new { id = item.ID })">
+                            <div class="avatar">
+                                <img src="~/Hinh/Users/@item.Avatar" alt="@item.Name">
+                            </div>
+                            <div class="info">
+                                <h2>@item.Name</h2>
+                                <p>Username: <span class="username">@item.UserName</span></p>
+                                <p>Email: <span class="email">@item.Email</span></p>
+                                <p>Location: <span class="location">@item.Location</span></p>
+                                <p>Rating: <span class="rating">@item.Rating</span></p>
+                                <p>Description: <span class="description">@item.Description</span></p>
+                            </div>
+                        </a>
+                    </div>
+                } *@
+                <div id="freelancerlistContainer">
+                    @foreach (var freelancer in Model)
+                    {
+                        <div class="col-md-12 mb-4">
+                            <a href="@Url.Action("FreelancerDetail", "User", new { id = freelancer.ID })" class="freelancer-card">
+                                <img src="~/image/cropped-1920-1080-1339443.png" />
+                                <div>
+
+                                    <h5>@freelancer.UserName</h5>
+
+
+                                    <p><strong>Rating:</strong> @freelancer.Rating</p>
+                                    <p><strong>Country:</strong> @freelancer.Location</p>
+                                    <p><strong>Description:</strong> @freelancer.Description</p>
+                                    <div class="skills">
+                                        @foreach (var skill in freelancer.FreelancerSkill)
+                                        {
+                                            <span>@skill</span>
+                                        }
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    }
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+

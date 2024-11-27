@@ -1,0 +1,39 @@
+﻿@model List<Job>
+@if (Model.Count() == 0)
+{
+    <h1 id="display_null" style="font-size: 20px; text-align: center;
+            margin-top: 15%;">
+        Create a new project
+    </h1>
+    <button id="postProject">
+        <strong>Post a Project</strong>
+    </button>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <td>ClientID</td>
+                <td>Description</td>
+                <td>ExpectedDuration</td>
+                <td>PaymentAmount</td>
+                <td>RequiredSkills</td>
+                <td>Status</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var job in Model)
+            {
+                <tr>
+                    <td>@job.ClientId</td>
+                    <td>@job.Description</td>
+                    <td>@job.ExpectedDuration</td>
+                    <td>@job.PaymentAmount</td>
+                    <td>@job.RequiredSkills</td>
+                    <td>@job.JobStatus</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

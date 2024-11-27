@@ -23,3 +23,27 @@
     flex-direction: row; /* Chỉ định hướng của flexbox là ngang (theo hàng) */
     justify-content: space-between;
 }
+
+
+.tag
+{   padding-left:50px;
+    margin-top:30px;
+    display:flex;
+    flex-direction: row;
+}
+.Proposaltag{
+    margin-left: 30px;
+    font-size:23px;
+    text-decoration:none;
+    color:black;
+}
+
+.Proposaltag:hover {
+    color: black;
+    border-bottom: 5px solid black;
+}
+
+.Jobdetailtag {
+    font-size: 23px;
+    color:black;
+}

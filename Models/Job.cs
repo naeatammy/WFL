@@ -12,6 +12,7 @@ namespace PBL3.Models
 		[ForeignKey("Client")]
 		public int ClientId { get; set; } // Khóa ngoại tham chiếu đến ClientId trong bảng Client
 		public Client Client { get; set; } // Đối tượng đại diện cho khóa ngoại
+		public Nullable<int> freelancerID { get; set; }	
 
 		public string Name { get; set; }
 		public string Description { get; set; }

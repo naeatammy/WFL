@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Project Posted Successfully";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<h2>Project Posted Successfully!</h2>
+<p>Your project has been posted successfully. Thank you!</p>
+
+<script>
+    setTimeout(function () {
+        window.location.href = '@Url.Action("ClientMyProjectOpenProject", "MyProject")';
+    }, 3000);
+</script>

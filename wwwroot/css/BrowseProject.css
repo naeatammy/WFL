@@ -87,7 +87,9 @@
 }
 
 #browsetextbox {
-    margin-top: 15px;
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 0.5rem; /* Border radius */
+    padding: 1rem; /* Padding inside the container */
     margin-left: 40px;
 }
 
@@ -103,8 +105,8 @@
     color: white;
 }
 
-#freelancer {
-    margin-left: 5%;
+.freelancertag{
+    margin-left:25px;
 }
 
 #project {
@@ -114,12 +116,14 @@
 }
 
 #filterbox {
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 0.25rem; /* Border radius */
+    padding: 1rem; /* Padding inside the container */
     margin-left: 5%;
     margin-top: 5px;
     width: 350px;
-    height: 900px;
+    height: 100%;
 }
 
 #filtertext {
@@ -135,11 +139,15 @@
 
 #skilltextbox {
     margin-left: 40px;
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 0.25rem; /* Border radius */
+    padding: 1px; /* Padding inside the container */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 5px 5px;
 }
 
 #checkbox1 {
-    margin-top: 20px;
-    margin-left: 50px;
+    
 }
 
 #wd {
@@ -178,8 +186,9 @@
 }
 
 #topresultbox {
-    border: 2px solid rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 0.25rem; /* Border radius */
+    padding: 1rem; /* Padding inside the container */
     width: 60%;
     height: 100%;
     margin-top: 5px;
@@ -228,6 +237,12 @@
 
 #fpmin1 {
     margin-left: 40px;
+   
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 0.25rem; /* Border radius */
+    padding: 1px; /* Padding inside the container */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 5px 5px;
 }
 
 #min1 {
@@ -237,6 +252,12 @@
 
 #fpmax1 {
     margin-left: 40px;
+    
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 0.25rem; /* Border radius */
+    padding: 1px; /* Padding inside the container */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    padding: 5px 5px;
 }
 
 #max1 {
@@ -267,4 +288,96 @@
     margin-left: 50px;
     margin-top: 2px;
     margin-bottom: 2px;
+
 }
+
+import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+    margin: 0px;
+}
+
+        .freelancer-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .freelancer-card img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .freelancer-card h5 {
+            font-size: 1.5em;
+            margin: 0 0 10px;
+        }
+
+        .freelancer-card p {
+            margin: 5px 0;
+        }
+
+        .freelancer-card .skills {
+            display: flex;
+            flex-wrap: wrap;
+            text-decoration: none;
+        }
+
+        .freelancer-card .skills span {
+            background-color: black;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            margin: 5px;
+        }
+
+        .rating {
+            display: flex;
+        }
+
+        .freelancertag {
+            margin-left: 75px;
+            margin-top: 25px;
+            text-decoration: none;
+            color: black;
+            transition: 0.25s;
+        }
+            .freelancertag:hover {
+                text-decoration: none;
+                color: #589af0;
+            }
+
+        .Projecttag {
+            margin-left: 100px;
+            margin-top: 25px;
+            border-bottom: 3px solid black;
+        }
+            .Projecttag:hover {
+                text-decoration:none;
+                color:black;
+            }
+
+        .resultandsort {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .sortjob
+        {
+            display:flex;
+            flex-direction: row;
+            margin-right:15px;
+        }

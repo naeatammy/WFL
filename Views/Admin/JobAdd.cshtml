@@ -39,23 +39,23 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description">ClientID:</label>
-                                <textarea asp-for="ClientID" class="form-control" id="clientid" rows="1"></textarea>
+                                <textarea asp-for="@Model.job.ClientId" class="form-control" id="clientid" rows="1"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="name">Name:</label>
-                                <input asp-for="Name" type="text" class="form-control" id="name" required>
+                                <input asp-for="@Model.job.Name" type="text" class="form-control" id="name" required>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <textarea asp-for="Description" class="form-control" id="description" rows="3"></textarea>
+                                <textarea asp-for="@Model.job.Description" class="form-control" id="description" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="expectedDuration">Expected Duration:</label>
-                                <input asp-for="ExpectedDuration" type="text" class="form-control" id="expectedDuration" required>
+                                <input asp-for="@Model.job.ExpectedDuration" type="text" class="form-control" id="expectedDuration" required>
                             </div>
                             <div class="form-group">
                                 <label for="paymentType">Payment Type:</label>
-                                <select asp-for="PaymentType" class="form-control" id="paymentType" required>
+                                <select asp-for="@Model.job.PaymentType" class="form-control" id="paymentType" required>
 
                                     <option value="Hourly Rate">Hourly Rate</option>
                                     <option value="Fixed Price">Fixed Price</option>
@@ -64,18 +64,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="paymentAmount">Payment Amount:</label>
-                                <input asp-for="PaymentAmount" type="text" class="form-control" id="paymentAmount" required>
+                                <input asp-for="@Model.job.PaymentAmount" type="text" class="form-control" id="paymentAmount" required>
                             </div>
-                            <div class="form-group">
-                                <label for="createBy">Create By:</label>
-                                <input asp-for="CreateBy" type="text" class="form-control" id="createBy" required>
-                            </div>
+                            
                             
                             <div class="form-group">
                                 <label for="jobStatus">Job Status:</label><br>
-                                <input type="radio" asp-for="JobStatus" value="Pending"> Pending<br>
-                                <input type="radio" asp-for="JobStatus" value="InProgress"> In Progress<br>
-                                <input type="radio" asp-for="JobStatus" value="Completed"> Completed<br>
+                                <input type="radio" asp-for="@Model.job.JobStatus" value="Pending"> Pending<br>
+                                <input type="radio" asp-for="@Model.job.JobStatus" value="InProgress"> In Progress<br>
+                                <input type="radio" asp-for="@Model.job.JobStatus" value="Completed"> Completed<br>
                             </div>
                             <div class="form-group">
                                 <label>Skills:</label><br />

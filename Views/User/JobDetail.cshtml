@@ -1,0 +1,185 @@
+﻿@{
+    Layout = "headerlayout";
+}
+@using PBL3.ViewModels
+
+@model JobDetailView
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Detail</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/FreelancerDetail.css">
+    <link rel="stylesheet" href="~/css/JobDetails.css">
+    <style>
+        
+
+      
+    </style>
+</head>
+<body>
+
+    
+    @* <div class="menulist">
+        <div>
+            <h1 id="WFL" class="menuText" style="font-style: italic;">
+                WFL.com
+            </h1>
+           
+                <h1 id="Browse" , class="menuText">
+                    Browse
+                </h1>
+            
+
+            <h1 id="pAP" , class="menuText" , style="cursor: pointer;">
+                Post a project
+            </h1>
+        </div>
+        <div>
+            <div>
+                <img src="~/image/noti.png" id="noti">
+            </div>
+            <div>
+                <img src="~/image/folder.png" id="folder">
+            </div>
+            <div>
+                <img src="~/image/ava.png" id="profile">
+            </div>
+            <div id="profile_name_box">
+                <div id="profile_name" , class="menucpn">
+                    username
+                </div>
+            </div>
+        </div>
+    </div> *@
+    @* <div class="tag">
+
+        <p class="Jobdetailtag"> <strong>Job Detail</strong>  </p>
+        <a class="Proposaltag" href="@Url.Action("ShowProposals", "User", new { jobId = Model.job.ID })"><strong>Proposal</strong> </a>
+
+    </div> *@
+    <div class="tag">
+        <p class="Jobdetailtag" style="border-bottom: 5px solid black; padding: 0px 5px 0px 5px; height: 40px;"> <strong>Job Detail</strong> </p>
+        <a class="Proposaltag" href="@Url.Action("ShowProposals", "User", new { jobId = Model.job.ID })" style="text-decoration: none; padding: 0px 5px 0px 5px; font-weight: bold; height: 40px;">
+            Proposals
+        </a>
+    </div>
+    <style>
+        .tag {
+            padding-left: 50px;
+            margin-top: 30px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .Proposaltag {
+            margin-left: 30px;
+            font-size: 23px;
+            text-decoration: none;
+            color: black;
+        }
+
+            .Proposaltag:hover {
+                color: black;
+                border-bottom: 5px solid black;
+            }
+
+        .Jobdetailtag {
+            font-size: 23px;
+            color: black;
+        }
+    </style>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">@Model.job.Name</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Project's Name:</strong> @Model.job.Name </p>
+                        <p class="card-text"><strong>Payment Type:</strong> @Model.job.PaymentType</p>
+                        <p class="card-text"><strong>Payment Amount:</strong> @Model.job.PaymentAmount </p>
+                        <p class="card-text"><strong>Description:</strong> @Model.job.Description </p>
+                        <p class="card-text"><strong>Expected Duration:</strong> @Model.job.ExpectedDuration </p>
+                        
+                        <p class="card-text"><strong>Skills Required:</strong></p>
+                        <div class="skills">
+                            @foreach (var skill in Model.ListSkill)
+                            {
+                                <span class="badge badge-dark">@skill</span>
+                            }
+                        </div>
+                        <p class="card-text"><strong>CreateAt:</strong> @Model.job.Client.User.CreatedAt </p>
+                        <p class="card-text"><strong>Project ID:</strong> @Model.job.ID</p>
+                    </div>
+                      <div class="row justify-content-end mt-3 mr-3">
+                    <div class="col-md-8 text-right">
+
+                            @if (Model.job.ClientId != ViewBag.CurrentUserId)
+                            {
+                                if (Model.JobRegistration != null)
+                                {
+                                    var isAlreadyApplied = false;
+                                    foreach (var registration in Model.JobRegistration)
+                                    {
+                                        if (ViewBag.CurrentUserId == registration.FreelancerID)
+                                        {
+                                            isAlreadyApplied = true;
+                                            break;
+                                        }
+                                    }
+
+                                    if (isAlreadyApplied)
+                                    {
+                                        <p>You have already applied</p>
+                                    }
+                                    else
+                                    {
+                                        if(Model.job.JobStatus == "Pending")
+                                        {      
+                                            <form asp-controller="User" asp-action="ApplyJob" asp-route-jobId="@Model.job.ID" method="post">
+                                                <button type="submit" class="btn btn-dark">Apply</button>
+                                            </form>
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <form asp-controller="User" asp-action="ApplyJob" asp-route-jobId="@Model.job.ID" method="post">
+                                        <button type="submit" class="btn btn-dark">Apply</button>
+                                    </form>
+                                }
+                            }
+
+                               
+                           
+                  
+
+                    
+
+
+
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card client-info">
+                    <div class="card-header">
+                        <h5>About the Client</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Client Id:</strong> @Model.job.ClientId </p>
+                        <p class="card-text"><strong> Rating: @Model.job.Client.Rating     </strong></p>
+                        <p class="card-text"><strong>Email:</strong> @Model.job.Client.User.Email </p>
+                        <p class="card-text"><strong>Location:</strong> @Model.job.Client.Location </p>
+                        <p class="card-text"><strong>Joined At:</strong> @Model.job.Client.User.CreatedAt </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
